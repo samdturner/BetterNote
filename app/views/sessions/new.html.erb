@@ -1,0 +1,12 @@
+<h1>Log in!</h1>
+<form action="<%= session_path %>" method="post">
+  <%= auth_token_input %>
+
+  <label for="email">Email</label>
+  <input type="text" id="email" name="user[email]" value="">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="user[password]" value="">
+
+  <button type="submit">Log in</button>
+</form>

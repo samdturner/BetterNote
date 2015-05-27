@@ -1,0 +1,12 @@
+<h1>Create an Account</h1>
+<form action="<%= users_path %>" method="post">
+  <%= auth_token_input %>
+
+  <label for="email">Email</label>
+  <input type="text" id="email" name="user[email]" value="<%= @user.email %>">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="user[password]">
+
+  <button type="submit">Sign up</button>
+</form>
