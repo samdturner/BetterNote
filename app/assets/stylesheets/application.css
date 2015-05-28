@@ -13,3 +13,160 @@
  *= require_tree .
  *= require_self
  */
+
+ #main:after {
+   content: "";
+   visibility: hidden;
+   display: block;
+   clear: both;
+ }
+
+.header-navbar {
+   padding: 14px 0 15px;
+ }
+
+ .header-navbar:after {
+   content: "";
+   visibility: hidden;
+   display: block;
+   clear: both;
+ }
+
+.header-group {
+   display: inline-block;
+   vertical-align: middle;
+ }
+
+ .header-left {
+   float: left;
+ }
+
+ .header-left > li {
+   font-size: 11px;
+   font-weight: 500;
+   color: #ababab;
+ }
+
+ .header-right {
+   float: right;
+ }
+
+.header-group > li {
+  display: inline-block;
+  padding-right: 18px;
+  margin-left: 20px;
+}
+
+.done-btn {
+  display: inline-block;
+  padding-left: 18px;
+  margin-right: 20px;
+}
+
+.done-btn {
+  background-color: #2dbe60;
+  color: #fff;
+  border: 1px solid #2dbe60;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  padding: 2px 18px 3px;
+  vertical-align: top;
+  font-size: 12px;
+  font-weight: 200;
+  line-height: 17px;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.done-btn:hover {
+  background-color: #28a955;
+  border: 1px solid #28a955;
+  color: #fff;
+}
+
+.share-btn {
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  height: 24px;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: top;
+  padding-top: 3px;
+}
+
+.share-btn > span {
+  color: #ababab;
+  font-weight: 200;
+  padding: 3px 10px 0;
+  font-size: 12px;
+  line-height: 17px;
+  margin-left: 1px;
+}
+
+.share-btn, .done-btn {
+  margin-left: 16px;
+}
+
+.share-btn-drop-arrow {
+  border-left: 1px solid #d1d1d1;
+  display: inline-block;
+  position: relative;
+  top: -3px;
+  height: 122%;
+}
+
+.fa-caret-down {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.share-caret {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+}
+
+.share-btn:hover span,
+.share-btn:hover i.fa-caret-down {
+  color: #2dbe60;
+}
+
+.share-btn:hover {
+  border-color: #2dbe60;
+}
+
+.share-btn:hover .share-btn-drop-arrow {
+  border-color: #2dbe60;
+}
+
+.create-notebook-group:hover {
+  cursor: pointer;
+}
+
+.create-notebook-group > .fa-book {
+  margin-right: 4px;
+}
+
+.create-notebook-group > .notebook-caret {
+  margin-left: 4px;
+}
+
+li > i.fa-tag {
+  margin-right: 4px;
+}
+
+nav.actions-group {
+  float: left;
+  padding: 12px 12px 24px 17px;
+  background-color: #f8f8f8;
+  height: 100%;
+}
+
+div.icon-circle {
+  border-radius:
+  width: 20px;
+  height: 20px;
+  border: 1px solid #2dbe60;
+  background-color: white;
+}
