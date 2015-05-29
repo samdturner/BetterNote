@@ -14,11 +14,12 @@
  *= require_self
  */
 
- #main:after {
-   content: "";
-   visibility: hidden;
-   display: block;
-   clear: both;
+ div.main-container {
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   right: 0px;
+   bottom: 0px;
  }
 
 .header-navbar {
@@ -161,12 +162,79 @@ nav.actions-group {
   padding: 12px 12px 24px 17px;
   background-color: #f8f8f8;
   height: 100%;
+  border-right: 1px solid #ececec;
+}
+
+ul.action-icons {
+  float: left;
 }
 
 div.icon-circle {
-  border-radius:
-  width: 20px;
-  height: 20px;
-  border: 1px solid #2dbe60;
+  border-radius: 18px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d1d1d1;
   background-color: white;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+div.icon-circle > i.action-icon {
+  color: #2dbe60;
+}
+
+div.icon-circle > i.fa-plus {
+  padding-left: 10px;
+  font-size: 20px;
+  padding-top: 8px;
+}
+
+div.icon-circle > i.fa-search {
+  padding-left: 8px;
+  font-size: 20px;
+  padding-top: 7px;
+}
+
+i.action-icon {
+  padding-left: 8px;
+  font-size: 20px;
+  padding-top: 7px;
+}
+
+div.icon-circle:hover {
+  background-color: #2dbe60;
+  border-color: #2dbe60;
+  cursor: pointer;
+}
+
+div.icon-circle:hover i.action-icon {
+  color: white;
+}
+
+ul.action-labels {
+  float: left;
+}
+
+div.action-label {
+  margin-bottom: 2px;
+}
+
+.action-label > span {
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  padding: 6px 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.action-label > span:hover {
+  color: #2dbe60;
+}
+
+div.action-label-group {
+  margin-top: 5px;
 }
