@@ -170,34 +170,64 @@ ul.action-icons {
 }
 
 div.icon-circle {
+  background-color: white;
+  border: 1px solid #d1d1d1;
+}
+
+div.icon-circle {
   border-radius: 18px;
   width: 36px;
   height: 36px;
-  border: 1px solid #d1d1d1;
-  background-color: white;
   margin-top: 12px;
   margin-bottom: 12px;
 }
 
-div.icon-circle > i.action-icon {
-  color: #2dbe60;
+div.secondary-circle {
+  border-radius: 18px;
+  width: 36px;
+  height: 36px;
+  margin-top: 13px;
+  margin-bottom: 13px;
 }
 
-div.icon-circle > i.fa-plus {
-  padding-left: 10px;
-  font-size: 20px;
-  padding-top: 8px;
+div.secondary-circle:hover {
+  background-color: #2dbe60;
+  cursor: pointer;
 }
 
-div.icon-circle > i.fa-search {
-  padding-left: 8px;
-  font-size: 20px;
-  padding-top: 7px;
+div.secondary-circle:hover > .action-icon {
+  color: white;
 }
 
 i.action-icon {
   padding-left: 8px;
   font-size: 20px;
+  padding-top: 7px;
+  color: #2dbe60;
+}
+
+div.icon-circle > i.fa-plus {
+  padding-left: 10px;
+  padding-top: 8px;
+}
+
+div.icon-circle > i.fa-search {
+  padding-left: 8px;
+  padding-top: 7px;
+}
+
+div.secondary-circle > i.fa-star {
+  padding-left: 9px;
+  padding-top: 8px;
+}
+
+div.secondary-circle > i.fa-file-text {
+  padding-left: 10px;
+  padding-top: 7px;
+}
+
+div.secondary-circle > i.fa-tag {
+  padding-left: 10px;
   padding-top: 7px;
 }
 
@@ -215,8 +245,12 @@ ul.action-labels {
   float: left;
 }
 
-div.action-label {
+div.action-label.top {
   margin-bottom: 2px;
+}
+
+div.action-label.middle {
+  margin-bottom: 1px;
 }
 
 .action-label > span {
@@ -237,4 +271,12 @@ div.action-label {
 
 div.action-label-group {
   margin-top: 5px;
+}
+
+div.action-icons-group.middle {
+  margin-top: 70px;
+}
+
+div.action-label-group.middle {
+  margin-top: 60px;
 }
