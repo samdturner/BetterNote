@@ -172,9 +172,7 @@ ul.action-icons {
 div.icon-circle {
   background-color: white;
   border: 1px solid #d1d1d1;
-}
-
-div.icon-circle {
+  transition: background-color 0.2s ease;
   border-radius: 18px;
   width: 36px;
   height: 36px;
@@ -188,6 +186,7 @@ div.secondary-circle {
   height: 36px;
   margin-top: 13px;
   margin-bottom: 13px;
+  transition: background-color 0.2s ease;
 }
 
 div.secondary-circle:hover {
@@ -279,4 +278,22 @@ div.action-icons-group.middle {
 
 div.action-label-group.middle {
   margin-top: 60px;
+}
+
+img.logo {
+  width: 30px;
+  height: 30px;
+  float: left;
+}
+
+div.nav-title > span {
+  font-family: caecilia, times, serif;
+  color: #2dbe60;
+  float: left;
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 5px;
+  text-transform: uppercase;
+  padding-top: 3px;
+  padding-bottom: 8px;
 }
