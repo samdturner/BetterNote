@@ -326,7 +326,7 @@ div.action-label.bottom {
 }
 
 .log-out-group {
-  padding: 16px 20px;
+  padding: 2px 20px;
 }
 
 div.secondary-circle > i.fa-sign-out {
@@ -341,4 +341,28 @@ div.secondary-circle:hover > i.fa-sign-out {
 
 div.action-label.bottom {
   padding-top: 6px;
+}
+
+header.note-title-header {
+  padding-top: 100px;
+}
+
+section.text-edit-section {
+  float: left;
+  width: calc(100% - 183px);
+  height: 100%;
+}
+
+div.note-title-container {
+  height: 32px;
+  min-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 732px;
+}
+
+div.note-title-container > input {
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
 }
