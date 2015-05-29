@@ -366,3 +366,10 @@ div.note-title-container > input {
   line-height: 32px;
   width: 100%;
 }
+
+div.note-title-container > input[type="text"] {
+  color: #2dbe60;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-size: 28px;
+}
