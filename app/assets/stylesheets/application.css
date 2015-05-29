@@ -167,6 +167,7 @@ nav.actions-group {
 
 ul.action-icons {
   float: left;
+  margin-top: 28px;
 }
 
 div.icon-circle {
@@ -242,6 +243,8 @@ div.icon-circle:hover i.action-icon {
 
 ul.action-labels {
   float: left;
+  color: #807f83;
+  margin-top: 28px;
 }
 
 div.action-label.top {
@@ -287,13 +290,55 @@ img.logo {
 }
 
 div.nav-title > span {
-  font-family: caecilia, times, serif;
+  font-family: 'Arvo', times, serif;
   color: #2dbe60;
   float: left;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   margin-left: 5px;
   text-transform: uppercase;
-  padding-top: 3px;
+  padding-top: 5px;
   padding-bottom: 8px;
+}
+
+div.log-out-container {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  border-top: 1px solid #ececec;
+  width: 183px;
+  color: #807f83;
+}
+
+.log-out-group:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
+
+div.action-label.bottom {
+  float: left;
+}
+
+.log-out-group > div.secondary-circle {
+  float: left;
+}
+
+.log-out-group {
+  padding: 16px 20px;
+}
+
+div.secondary-circle > i.fa-sign-out {
+  padding-top: 9px;
+  padding-left: 11px;
+  color: #2dbe60;
+}
+
+div.secondary-circle:hover > i.fa-sign-out {
+  color: white;
+}
+
+div.action-label.bottom {
+  padding-top: 6px;
 }
