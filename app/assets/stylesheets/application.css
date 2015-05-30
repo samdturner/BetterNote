@@ -120,6 +120,7 @@
 .fa-caret-down {
   color: #d1d1d1;
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .share-caret {
@@ -163,6 +164,7 @@ nav.actions-group {
   background-color: #f8f8f8;
   height: 100%;
   border-right: 1px solid #ececec;
+  position: fixed;
 }
 
 ul.action-icons {
@@ -294,7 +296,7 @@ div.nav-title > span {
   color: #2dbe60;
   float: left;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   margin-left: 5px;
   text-transform: uppercase;
   padding-top: 5px;
@@ -303,7 +305,7 @@ div.nav-title > span {
 
 div.log-out-container {
   position: absolute;
-  bottom: 0px;
+  bottom: 40px;
   left: 0px;
   border-top: 1px solid #ececec;
   width: 183px;
@@ -345,12 +347,14 @@ div.action-label.bottom {
 
 header.note-title-header {
   padding-top: 100px;
+  margin-bottom: 15px;
 }
 
 section.text-edit-section {
   float: left;
   width: calc(100% - 183px);
   height: 100%;
+  margin-left: 184px;
 }
 
 div.note-title-container {
@@ -358,7 +362,7 @@ div.note-title-container {
   min-width: 240px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 732px;
+  max-width: 780px;
 }
 
 div.note-title-container > input {
@@ -372,4 +376,102 @@ div.note-title-container > input[type="text"] {
   font-family: 'Roboto', helvetica, arial, sans-serif;
   font-weight: 100;
   font-size: 28px;
+}
+
+div.text-editor-page {
+  min-height: 400px;
+  width: 770px;
+  margin: 0 auto 0 auto;
+  border: 1px solid #2dbe60;
+}
+
+@media screen and (max-width: 1083px) {
+  div.note-title-container {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+  div.text-editor-page {
+    margin-left: 50px;
+    margin-right: 50px;
+    width: calc(100% - 100px);
+  }
+}
+
+div.text-editor-page {
+  padding: 15px;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 14px;
+  color: #383838;
+}
+
+div.tool-bar {
+  background: #393d41;
+  border-radius: 4px;
+  padding: 10px;
+  height: 28px;
+  width: 481px;
+  position: relative;
+  top: -400px;
+  left: 100px;
+}
+
+span.tool-text {
+  font-family: helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 100;
+  color: #f8f8f8;
+  padding-right: 3px;
+  line-height: 28px;
+  transition: color 0.3s ease;
+}
+
+div.tool-bar > div {
+  display: inline-block;
+  cursor: pointer;
+  padding-right: 10px;
+  height: 28px;
+  vertical-align: middle;
+  padding: 0px 12px;
+}
+
+div.color-tool {
+  height: 13px;
+  width: 13px;
+  border: 1px solid #878787;
+  display: inline-block;
+  background: rgb(56, 56, 56);
+  transition: border 0.3s ease;
+}
+
+div.color-tool-group {
+  display: inline-block;
+  margin-top: 1px;
+}
+
+div.tool-bar > div.tool-group-w-border {
+  border-right: 1px solid #606060;
+}
+
+i.tool-bar-icon {
+  color: #f8f8f8;
+  padding: 5px 8px;
+  transition: color 0.3s ease;
+}
+
+div.tool-group-w-border:hover > span.tool-text,
+div.tool-group-w-border:hover > i.fa-caret-down {
+  color: #2dbe60;
+}
+
+div.color-tool-group:hover > div.color-tool {
+  border-color: #2dbe60;
+}
+
+div.color-tool-group:hover > i.fa-caret-down {
+  color: #2dbe60;
+}
+
+i.tool-bar-icon:hover {
+  color: #2dbe60;
 }

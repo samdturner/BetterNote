@@ -77,3 +77,7 @@ input[type="submit"] {
    font-weight: 300;
    font-family: 'Arvo', times, serif;
 }
+
+::selection {
+  background: #c9f2d0;
+}
