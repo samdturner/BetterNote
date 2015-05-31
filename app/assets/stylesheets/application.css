@@ -476,33 +476,61 @@ i.tool-bar-icon:hover {
   color: #2dbe60;
 }
 
-div.font-options-container {
+div.font-options-wrapper {
+  position: absolute;
+  left: 15px;
+  top: -187px;
+  transition: top 0.7s ease;
+  overflow: hidden;
+}
+
+div.font-tool:hover > div.font-options-wrapper {
+  top: 37px;
+}
+
+div.font-tool:hover > div.font-options-wrapper > div.font-options-container {
+  bottom: 0px;
+}
+
+div.font-options-container,
+div.size-options-container {
   background: #515559;
   border-radius: 0 0 4px 4px;
   padding: 5px;
-  position: absolute;
-  left: 15px;
-  visibility: hidden;
+  position: relative;
+  bottom: -224px;
+  /*visibility: hidden;*/
+  transition: bottom 0.7s ease;
 }
 
-div.font-tool:focus > div.font-options-container {
+div.size-options-container {
+  left: 90px;
+}
+
+div.size-options-container > ul.options > li {
+  font-family: helvetica;
+  font-weight: 100;
+  font-size: 13px;
+}
+
+div.font-tool:hover div.font-options-container,
+div.size-tool:hover div.size-options-container {
   visibility: visible;
 }
 
-ul.font-options {
+ul.options {
   padding: 0 4px;
 }
 
-ul.font-options > li {
+ul.options > li {
   color: white;
   font-size: 14px;
   padding: 7px 0;
   transition: color 0.3s ease;
 }
 
-ul.font-options > li:hover {
+ul.options > li:hover {
   color: #2dbe60;
-
 }
 
 li.gotham {
