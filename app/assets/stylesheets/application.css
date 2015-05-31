@@ -475,3 +475,60 @@ div.color-tool-group:hover > i.fa-caret-down {
 i.tool-bar-icon:hover {
   color: #2dbe60;
 }
+
+div.font-options-container {
+  background: #515559;
+  border-radius: 0 0 4px 4px;
+  padding: 5px;
+  position: absolute;
+  left: 15px;
+  visibility: hidden;
+}
+
+div.font-tool:focus > div.font-options-container {
+  visibility: visible;
+}
+
+ul.font-options {
+  padding: 0 4px;
+}
+
+ul.font-options > li {
+  color: white;
+  font-size: 14px;
+  padding: 7px 0;
+  transition: color 0.3s ease;
+}
+
+ul.font-options > li:hover {
+  color: #2dbe60;
+
+}
+
+li.gotham {
+  font-family: gotham;
+}
+
+li.georgia {
+  font-family: georgia;
+}
+
+li.helvetica {
+  font-family: helvetica;
+}
+
+li.courier-new {
+  font-family: 'Courier New';
+}
+
+li.times-new-roman {
+  font-family: 'Times New Roman';
+}
+
+li.trebuchet {
+  font-family: trebuchet;
+}
+
+li.verdana {
+  font-family: verdana;
+}
