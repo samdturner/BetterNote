@@ -141,8 +141,15 @@
         </div>
         <div class="font-edit-group tool-group-w-border">
           <div class="color-tool-group">
-            <div class="color-tool"></div>
+            <div class="color-tool default"></div>
             <i class="fa fa-caret-down color-picker"></i>
+            <div class="color-dropdown-wrapper">
+              <div class="color-dropdown-container">
+                  <% for( var i = 0; i < colorArr.length; i++ ) { %>
+                    <div class="color-tool selection" style="background-color:<%= colorArr[i] %>"></div>
+                  <% } %>
+              </div>
+            </div>
           </div>
           <i class="fa fa-bold tool-bar-icon"></i>
           <i class="fa fa-italic tool-bar-icon"></i>
@@ -155,6 +162,16 @@
         </div>
         <div class="paragraph-alignment-tool">
           <i class="fa fa-align-left tool-bar-icon"></i>
+          <div class="paragraph-alignment-wrapper">
+            <div class="paragraph-alignment-container">
+              <ul class="options">
+                <li><i class="fa fa-align-left"></i></li>
+                <li><i class="fa fa-align-center"></i></li>
+                <li><i class="fa fa-align-right"></i></li>
+                <li><i class="fa fa-align-justify"></i></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </article>
