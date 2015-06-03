@@ -26,10 +26,26 @@ BetterNote.Views.NewNote = Backbone.View.extend({
                         'rgb(255, 204, 153)', 'rgb(255, 255, 153)',
                         'rgb(204, 255, 204)', 'rgb(204, 255, 255)',
                         'rgb(153, 204, 255)', 'rgb(204, 153, 255)',
-                        'rgb(255, 255, 255)', 'rgb(0, 80, 255)' 
+                        'rgb(255, 255, 255)', 'rgb(0, 80, 255)'
                      ]
-    var content = this.template({colorArr: colorArr});
+    var fontStyleArr = ["Gotham", "Georgia", "Helvetica", "Courier New",
+                        "Times New Roman", "Trebuchet", "Verdana"]
+    var fontSizeArr = ["8", "10", "14", "20", "24", "36", "48"]
+    var content = this.template({ fontStyleArr: fontStyleArr,
+                                  fontSizeArr: fontSizeArr,
+                                  colorArr: colorArr });
     this.$el.html(content);
+    $(this.$el).find('.font-modifier').click(function () {
+      var command = $(this).attr('command');
+      var valueArg = $(this).attr('valuearg');
+      document.execCommand(command, true, valueArg);
+    });
+
+    $(this.$el).find('.hyperlink-submit').click(function () {
+      var valueArg = $(this.$el).find('input.hyperlink').val();
+      document.execCommand('createLink', true, valueArg);
+    });
+    
     return this;
   }
 })

@@ -1,6 +1,6 @@
 BetterNote.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
-    this.$rootEl = $('#main');
+    this.$rootEl = $('#page-content');
   },
 
   routes: {

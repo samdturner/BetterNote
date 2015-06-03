@@ -1,140 +1,66 @@
-<div class="main-container">
-  <nav class="actions-group">
+<section class="text-edit-section">
+  <header>
+    <nav class="header-navbar">
+      <ul class="header-group header-left">
+        <li class="create-notebook-group">
+          <i class="fa fa-book"></i>
+          <span>sam3turner's notebook</span>
+          <i class="fa fa-caret-down notebook-caret"></i>
+        </li>
+        <li>
+          <i class="fa fa-tag"></i>
+          <span>New tag...</span>
+        </li>
+      </ul>
 
-    <div class="nav-title">
-      <img src="http://i.imgur.com/RdKXNIB.png" class="logo"/>
-      <span>BetterNote</span>
-    </div>
-
-    <ul class="action-icons">
-      <div class="action-icons-group">
-        <div class="icon-circle">
-          <i class="fa fa-plus action-icon"></i>
-        </div>
-        <div class="icon-circle">
-          <i class="fa fa-search action-icon"></i>
-        </div>
-      </div>
-      <div class="action-icons-group middle">
-        <div class="secondary-circle">
-          <i class="fa fa-star action-icon"></i>
-        </div>
-        <div class="secondary-circle">
-          <i class="fa fa-file-text action-icon"></i>
-        </div>
-        <div class="secondary-circle">
-          <i class="fa fa-book action-icon"></i>
-        </div>
-        <div class="secondary-circle">
-          <i class="fa fa-tag action-icon"></i>
-        </div>
-      </div>
-    </ul>
-
-    <ul class="action-labels">
-      <div class="action-label-group">
-        <div class="action-label top">
-          <span>New Note</span>
-        </div>
-        <div class="action-label">
-          <span>Search</span>
-        </div>
-      </div>
-      <div class="action-label-group middle">
-        <div class="action-label middle">
-          <span>Shortcuts</span>
-        </div>
-        <div class="action-label middle">
-          <span>Notes</span>
-        </div>
-        <div class="action-label middle">
-          <span>Notebooks</span>
-        </div>
-        <div class="action-label middle">
-          <span>Tags</span>
-        </div>
-      </div>
-    </ul>
-
-    <div class="log-out-container">
-      <div class="log-out-group">
-        <div class="secondary-circle">
-          <i class="fa fa-sign-out"></i>
-        </div>
-        <div class="action-label bottom">
-          <span>Logout</span>
-        </div>
-      </div>
-    </div>
-
-  </nav>
-
-  <section class="text-edit-section">
-    <header>
-      <nav class="header-navbar">
-        <ul class="header-group header-left">
-          <li class="create-notebook-group">
-            <i class="fa fa-book"></i>
-            <span>sam3turner's notebook</span>
-            <i class="fa fa-caret-down notebook-caret"></i>
-          </li>
-          <li>
-            <i class="fa fa-tag"></i>
-            <span>New tag...</span>
-          </li>
-        </ul>
-
-        <ul class="header-group header-right">
-          <div class="down-triangle"></div>
-          <div class="share-btn">
-            <span>Share</span>
-            <div class="share-btn-drop-arrow">
-              <i class="fa fa-caret-down share-caret"></i>
-            </div>
-          </div>
-          <button type="button" class="done-btn">Done</button>
-        </ul>
-      </nav>
-    </header>
-
-    <header class="note-title-header">
-      <div class="note-title-container">
-        <input type="text" name="note[title]" placeholder="Title your note...">
-      </div>
-    </header>
-    <article class="note-body">
-      <div class="text-editor-page" contenteditable="true"></div>
-      <div class="tool-bar">
-        <div class="font-tool tool-group-w-border">
-          <span class="tool-text">Font</span>
-          <i class="fa fa-caret-down"></i>
-          <div class="font-options-wrapper">
-            <div class="font-options-container">
-              <ul class="options">
-                <li class="gotham">Gotham</li>
-                <li class="georgia">Georgia</li>
-                <li class="helvetica">Helvetica</li>
-                <li class="courier-new">Courier New</li>
-                <li class="times-new-roman">Times New Roman</li>
-                <li class="trebuchet">Trebuchet</li>
-                <li class="verdana">Verdana</li>
-              </ul>
-            </div>
+      <ul class="header-group header-right">
+        <div class="down-triangle"></div>
+        <div class="share-btn">
+          <span>Share</span>
+          <div class="share-btn-drop-arrow">
+            <i class="fa fa-caret-down share-caret"></i>
           </div>
         </div>
-        <div class="size-tool tool-group-w-border">
-          <span class="tool-text">Size</span>
-          <i class="fa fa-caret-down"></i>
-          <div class="size-options-wrapper">
-            <div class="size-options-container">
-              <ul class="options">
-                <li>8</li>
-                <li>10</li>
-                <li>12</li>
-                <li>14</li>
-                <li>18</li>
-                <li>24</li>
-                <li>36</li>
+        <button type="button" class="done-btn">Done</button>
+      </ul>
+    </nav>
+  </header>
+
+  <header class="note-title-header">
+    <div class="note-title-container">
+      <input type="text" name="note[title]" placeholder="Title your note...">
+    </div>
+  </header>
+  <article class="note-body">
+    <div class="text-editor-page" contenteditable="true"></div>
+    <div class="tool-bar">
+      <div class="font-tool tool-group-w-border">
+        <span class="tool-text">Font</span>
+        <i class="fa fa-caret-down"></i>
+        <div class="font-options-wrapper">
+          <div class="font-options-container">
+            <ul class="options">
+              <% for( var i = 0; i < fontStyleArr.length; i++ ) { %>
+                <li class="font-modifier"
+                command="fontName"
+                valueArg="<%= fontStyleArr[i] %>"><%= fontStyleArr[i] %>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="size-tool tool-group-w-border">
+        <span class="tool-text">Size</span>
+        <i class="fa fa-caret-down"></i>
+        <div class="size-options-wrapper">
+          <div class="size-options-container">
+            <ul class="options">
+              <% for( var i = 0; i < 7; i++ ) { %>
+                <li class="font-modifier"
+                command="fontSize"
+                valueArg="<%= i + 1 %>"><%= fontSizeArr[i] %></li>
+                <% } %>
               </ul>
             </div>
           </div>
@@ -145,35 +71,55 @@
             <i class="fa fa-caret-down color-picker"></i>
             <div class="color-dropdown-wrapper">
               <div class="color-dropdown-container">
-                  <% for( var i = 0; i < colorArr.length; i++ ) { %>
-                    <div class="color-tool selection" style="background-color:<%= colorArr[i] %>"></div>
+                <% for( var i = 0; i < colorArr.length; i++ ) { %>
+                  <div class="color-tool selection font-modifier"
+                  command="foreColor"
+                  valueArg="<%= colorArr[i] %>"
+                  style="background-color:<%= colorArr[i] %>"></div>
                   <% } %>
+                </div>
+              </div>
+            </div>
+            <i class="fa fa-bold tool-bar-icon font-modifier" command="bold"></i>
+            <i class="fa fa-italic tool-bar-icon font-modifier"
+            command="italic"></i>
+            <i class="fa fa-underline tool-bar-icon font-modifier"
+            command="underline"></i>
+            <i class="fa fa-strikethrough tool-bar-icon font-modifier"
+            command="strikeThrough"></i>
+            <i class="fa fa-superscript tool-bar-icon font-modifier"
+            command="superscript"></i>
+          </div>
+          <div class="hyperlink-tool tool-group-w-border">
+            <i class="fa fa-link tool-bar-icon"></i>
+            <div class="hyperlink-wrapper">
+              <div class="hyperlink-container">
+                <div class="hyperlink-text-container">
+                  <span class="hyperlink-label">Link</span>
+                  <input type="text" class="hyperlink">
+                </div>
+                <span class="hyperlink-submit">Apply</span>
               </div>
             </div>
           </div>
-          <i class="fa fa-bold tool-bar-icon"></i>
-          <i class="fa fa-italic tool-bar-icon"></i>
-          <i class="fa fa-underline tool-bar-icon"></i>
-          <i class="fa fa-strikethrough tool-bar-icon"></i>
-          <i class="fa fa-superscript tool-bar-icon"></i>
-        </div>
-        <div class="hyperlink-tool tool-group-w-border">
-          <i class="fa fa-link tool-bar-icon"></i>
-        </div>
-        <div class="paragraph-alignment-tool">
-          <i class="fa fa-align-left tool-bar-icon"></i>
-          <div class="paragraph-alignment-wrapper">
-            <div class="paragraph-alignment-container">
-              <ul class="options">
-                <li><i class="fa fa-align-left"></i></li>
-                <li><i class="fa fa-align-center"></i></li>
-                <li><i class="fa fa-align-right"></i></li>
-                <li><i class="fa fa-align-justify"></i></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-  </section>
-</div>
+          <div class="paragraph-alignment-tool">
+            <i class="fa fa-align-left tool-bar-icon"></i>
+            <div class="paragraph-alignment-wrapper">
+              <div class="paragraph-alignment-container">
+                <ul class="options">
+                  <li><i class="fa fa-align-left font-modifier"
+                    command="justifyLeft"></i></li>
+                    <li><i class="fa fa-align-center font-modifier"
+                      command="justifyCenter"></i></li>
+                      <li><i class="fa fa-align-right font-modifier"
+                        command="justifyRight"></i></li>
+                        <li><i class="fa fa-align-justify font-modifier"
+                          command="justifyFull"></i></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </section>
