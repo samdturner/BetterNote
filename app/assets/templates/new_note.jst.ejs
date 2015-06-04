@@ -42,9 +42,9 @@
             <ul class="options">
               <% for( var i = 0; i < fontStyleArr.length; i++ ) { %>
                 <li class="font-modifier"
-                command="fontName"
-                valueArg="<%= fontStyleArr[i] %>"><%= fontStyleArr[i] %>
-              </li>
+                    command="fontName"
+                    valueArg="<%= fontStyleArr[i] %>"><%= fontStyleArr[i] %>
+                </li>
               <% } %>
             </ul>
           </div>
@@ -94,11 +94,15 @@
             <i class="fa fa-link tool-bar-icon"></i>
             <div class="hyperlink-wrapper">
               <div class="hyperlink-container">
+                <div class="title-text-container">
+                  <span class="text-label">Title</span>
+                  <input type="text" class="hyperlink-title">
+                </div>
                 <div class="hyperlink-text-container">
                   <span class="hyperlink-label">Link</span>
                   <input type="text" class="hyperlink">
                 </div>
-                <span class="hyperlink-submit">Apply</span>
+                <div class="hyperlink-submit">Apply</div>
               </div>
             </div>
           </div>

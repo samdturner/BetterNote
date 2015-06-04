@@ -7,7 +7,6 @@ span, article, footer, time, small {
   padding: 0;
   border: 0;
   outline: 0;
-  /*font: inherit;*/
   color: inherit;
   text-align: inherit;
   text-decoration: inherit;
@@ -19,6 +18,12 @@ span, article, footer, time, small {
 
 ul {
   list-style: none;
+}
+
+a:link {
+  color: #0000EE;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 img {
@@ -84,7 +89,7 @@ input[type="submit"] {
 
 
 .font-modifier,
-span.hyperlink-submit {
+div.hyperlink-submit {
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */

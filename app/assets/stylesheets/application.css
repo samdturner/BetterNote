@@ -650,8 +650,8 @@ ul.options > li > i:hover {
 div.hyperlink-wrapper {
   position: absolute;
   left: 30px;
-  top: -66px;
-  height: 107px;
+  top: -115px;
+  height: 150px;
   transition: top 0.7s ease;
   overflow: hidden;
   z-index: -1;
@@ -667,7 +667,7 @@ div.hyperlink-container {
   padding: 12px;
   border-radius: 4px;
   position: relative;
-  top: 106px;
+  top: 155px;
   transition: top 0.7s ease;
 }
 
@@ -681,7 +681,8 @@ div.hyperlink-input {
   height: 28px;
 }
 
-div.hyperlink-text-container {
+div.hyperlink-text-container,
+div.title-text-container {
   background-color: #313539;
   border: 1px solid #2b2e31;
   height: 28px;
@@ -692,7 +693,8 @@ div.hyperlink-text-container {
   transition: bottom 0.7s ease;
 }
 
-.hyperlink-label {
+.hyperlink-label,
+.text-label {
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 400;
@@ -706,7 +708,7 @@ div.hyperlink-text-container {
   margin: 1px;
 }
 
-span.hyperlink-submit {
+div.hyperlink-submit {
   font-family: gotham, helvetica, arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -720,19 +722,13 @@ span.hyperlink-submit {
   float: right;
 }
 
-span.hyperlink-submit:hover {
+div.hyperlink-submit:hover {
   background: #212426;
   border: 1px solid #131415;
 }
 
-div.hyperlink-container:after {
-  content: "";
-  visibility: hidden;
-  display: block;
-  clear: both;
-}
-
-input.hyperlink {
+input.hyperlink,
+input.hyperlink-title {
   font-family: helvetica, arial, sans-serif;
   font-size: 13px;
   font-weight: 300;
@@ -745,4 +741,11 @@ input.hyperlink {
   outline: none;
   border: none;
   width: 80%;
+}
+
+div.hyperlink-container:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  clear: both;
 }
