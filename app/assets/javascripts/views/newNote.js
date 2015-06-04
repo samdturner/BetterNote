@@ -53,6 +53,49 @@ BetterNote.Views.NewNote = Backbone.View.extend({
     }
   },
 
+  bindFontTool: function (view) {
+    view.subEl(view, '.font-modifier').click(function (e) {
+      var command = $(e.currentTarget).attr('command');
+      var valueArg = $(e.currentTarget).attr('valuearg');
+      document.execCommand(command, true, valueArg);
+    });
+  },
+
+  bindHyperlinkTool: function (view) {
+    view.subEl(view, '.hyperlink-tool').mouseenter(function(e) {
+      var selRange = view.saveSelection();
+      var text = window.getSelection().toString();
+      view.subEl(view, 'input.hyperlink-title').val(text);
+      view.bindHyperlinkSub(view, selRange);
+    });
+  },
+
+  bindHyperlinkSub: function (view, selRange) {
+    view.subEl(view, '.hyperlink-submit').click(function () {
+      view.restoreSelection(selRange);
+      var link = view.subEl(view, 'input.hyperlink').val();
+      document.execCommand('createLink', true, link);
+    });
+  },
+
+  bindAnchorTag: function (view) {
+    view.subEl(view, ".text-editor-page").on('click', "a[href]", function(e) {
+      var url = $(e.currentTarget).attr('href');
+      var win = window.open(url, '_blank');
+      if(win){
+          win.focus();
+      } else {
+          alert('Please allow popups for this site');
+      }
+    });
+  },
+
+  unbindHyperlinkSub: function(view) {
+    view.subEl(view, '.hyperlink-tool').mouseleave(function(e) {
+      view.subEl(view, '.hyperlink-submit').unbind();
+    });
+  },
+
   saveSelection: function () {
     if (window.getSelection) {
         sel = window.getSelection();
@@ -71,38 +114,15 @@ BetterNote.Views.NewNote = Backbone.View.extend({
                                   colorArr: this.colorArr });
     this.$el.html(content);
 
-    $(this.$el).find('.font-modifier').click(function (e) {
-      var command = $(e.currentTarget).attr('command');
-      var valueArg = $(e.currentTarget).attr('valuearg');
-      document.execCommand(command, true, valueArg);
-    });
-
-
-    $(this.$el).find('.hyperlink-tool').mouseenter(function(e) {
-      var selRange = this.saveSelection();
-      var text = window.getSelection().toString();
-      $(this.$el).find('input.hyperlink-title').val(text);
-      $(this.$el).find('.hyperlink-submit').click(function () {
-        this.restoreSelection(selRange);
-        var link = $(this.$el).find('input.hyperlink').val();
-        document.execCommand('createLink', true, link);
-      }.bind(this));
-    }.bind(this));
-
-    $(this.$el).find('.hyperlink-tool').mouseleave(function(e) {
-      $(this.$el).find('.hyperlink-submit').unbind();
-    }.bind(this));
-
-    $(this.$el).find(".text-editor-page").on('click', "a[href]", function(e) {
-      var url = $(e.currentTarget).attr('href');
-      var win = window.open(url, '_blank');
-      if(win){
-          win.focus();
-      } else {
-          alert('Please allow popups for this site');
-      }
-    });
+    this.bindFontTool(this);
+    this.bindHyperlinkTool(this);
+    this.unbindHyperlinkSub(this);
+    this.bindAnchorTag(this);
 
     return this;
+  },
+
+  subEl: function (view, selector) {
+    return $(view.$el).find(selector);
   }
 })
