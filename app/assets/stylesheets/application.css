@@ -15,6 +15,7 @@
  */
 
  div.main-container {
+
    position: absolute;
    left: 0px;
    top: 0px;
@@ -396,6 +397,10 @@ div.text-editor-page {
     margin-right: 50px;
     width: calc(100% - 100px);
   }
+
+  div.tool-bar {
+    margin-left: 50px !important;
+  }
 }
 
 div.text-editor-page {
@@ -405,15 +410,19 @@ div.text-editor-page {
   color: #383838;
 }
 
+div.tool-bar-container {
+  margin-bottom: 50px;
+}
+
 div.tool-bar {
   background: #393d41;
   border-radius: 4px;
   padding: 10px;
   height: 28px;
   width: 481px;
+  margin-right: 50px;
+  margin-left: calc(100% - 800px - (100% - 800px) * 0.5);
   position: relative;
-  top: -400px;
-  left: 100px;
 }
 
 span.tool-text {
@@ -484,6 +493,14 @@ div.color-tool-group:hover > i.fa-caret-down {
 }
 
 i.tool-bar-icon:hover {
+  color: #2dbe60;
+}
+
+div.hyperlink-tool:hover > i {
+  color: #2dbe60;
+}
+
+div.paragraph-alignment-tool:hover > i {
   color: #2dbe60;
 }
 

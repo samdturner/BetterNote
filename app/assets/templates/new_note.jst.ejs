@@ -31,99 +31,102 @@
       <input type="text" name="note[title]" placeholder="Title your note...">
     </div>
   </header>
-  <article class="note-body">
-    <div class="text-editor-page" contenteditable="true"></div>
-    <div class="tool-bar">
-      <div class="font-tool tool-group-w-border">
-        <span class="tool-text">Font</span>
-        <i class="fa fa-caret-down"></i>
-        <div class="font-options-wrapper">
-          <div class="font-options-container">
-            <ul class="options">
-              <% for( var i = 0; i < fontStyleArr.length; i++ ) { %>
-                <li class="font-modifier"
-                    command="fontName"
-                    valueArg="<%= fontStyleArr[i] %>"><%= fontStyleArr[i] %>
-                </li>
-              <% } %>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="size-tool tool-group-w-border">
-        <span class="tool-text">Size</span>
-        <i class="fa fa-caret-down"></i>
-        <div class="size-options-wrapper">
-          <div class="size-options-container">
-            <ul class="options">
-              <% for( var i = 0; i < 7; i++ ) { %>
-                <li class="font-modifier"
-                command="fontSize"
-                valueArg="<%= i + 1 %>"><%= fontSizeArr[i] %></li>
-                <% } %>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="font-edit-group tool-group-w-border">
-          <div class="color-tool-group">
-            <div class="color-tool default"></div>
-            <i class="fa fa-caret-down color-picker"></i>
-            <div class="color-dropdown-wrapper">
-              <div class="color-dropdown-container">
-                <% for( var i = 0; i < colorArr.length; i++ ) { %>
-                  <div class="color-tool selection font-modifier"
-                  command="foreColor"
-                  valueArg="<%= colorArr[i] %>"
-                  style="background-color:<%= colorArr[i] %>"></div>
-                  <% } %>
-                </div>
-              </div>
-            </div>
-            <i class="fa fa-bold tool-bar-icon font-modifier" command="bold"></i>
-            <i class="fa fa-italic tool-bar-icon font-modifier"
-            command="italic"></i>
-            <i class="fa fa-underline tool-bar-icon font-modifier"
-            command="underline"></i>
-            <i class="fa fa-strikethrough tool-bar-icon font-modifier"
-            command="strikeThrough"></i>
-            <i class="fa fa-superscript tool-bar-icon font-modifier"
-            command="superscript"></i>
-          </div>
-          <div class="hyperlink-tool tool-group-w-border">
-            <i class="fa fa-link tool-bar-icon"></i>
-            <div class="hyperlink-wrapper">
-              <div class="hyperlink-container">
-                <div class="title-text-container">
-                  <span class="text-label">Title</span>
-                  <input type="text" class="hyperlink-title">
-                </div>
-                <div class="hyperlink-text-container">
-                  <span class="hyperlink-label">Link</span>
-                  <input type="text" class="hyperlink">
-                </div>
-                <div class="hyperlink-submit">Apply</div>
-              </div>
-            </div>
-          </div>
-          <div class="paragraph-alignment-tool">
-            <i class="fa fa-align-left tool-bar-icon"></i>
-            <div class="paragraph-alignment-wrapper">
-              <div class="paragraph-alignment-container">
-                <ul class="options">
-                  <li><i class="fa fa-align-left font-modifier"
-                    command="justifyLeft"></i></li>
-                    <li><i class="fa fa-align-center font-modifier"
-                      command="justifyCenter"></i></li>
-                      <li><i class="fa fa-align-right font-modifier"
-                        command="justifyRight"></i></li>
-                        <li><i class="fa fa-align-justify font-modifier"
-                          command="justifyFull"></i></li>
-                        </ul>
-                      </div>
-                    </div>
+          <div class="tool-bar-container">
+            <div class="tool-bar">
+              <div class="font-tool tool-group-w-border">
+                <span class="tool-text">Font</span>
+                <i class="fa fa-caret-down"></i>
+                <div class="font-options-wrapper">
+                  <div class="font-options-container">
+                    <ul class="options">
+                      <% for( var i = 0; i < fontStyleArr.length; i++ ) { %>
+                        <li class="font-modifier"
+                            command="fontName"
+                            valueArg="<%= fontStyleArr[i] %>"><%= fontStyleArr[i] %>
+                        </li>
+                      <% } %>
+                    </ul>
                   </div>
                 </div>
               </div>
+              <div class="size-tool tool-group-w-border">
+                <span class="tool-text">Size</span>
+                <i class="fa fa-caret-down"></i>
+                <div class="size-options-wrapper">
+                  <div class="size-options-container">
+                    <ul class="options">
+                      <% for( var i = 0; i < 7; i++ ) { %>
+                        <li class="font-modifier"
+                        command="fontSize"
+                        valueArg="<%= i + 1 %>"><%= fontSizeArr[i] %></li>
+                        <% } %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="font-edit-group tool-group-w-border">
+                  <div class="color-tool-group">
+                    <div class="color-tool default"></div>
+                    <i class="fa fa-caret-down color-picker"></i>
+                    <div class="color-dropdown-wrapper">
+                      <div class="color-dropdown-container">
+                        <% for( var i = 0; i < colorArr.length; i++ ) { %>
+                          <div class="color-tool selection font-modifier"
+                          command="foreColor"
+                          valueArg="<%= colorArr[i] %>"
+                          style="background-color:<%= colorArr[i] %>"></div>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                    <i class="fa fa-bold tool-bar-icon font-modifier" command="bold"></i>
+                    <i class="fa fa-italic tool-bar-icon font-modifier"
+                    command="italic"></i>
+                    <i class="fa fa-underline tool-bar-icon font-modifier"
+                    command="underline"></i>
+                    <i class="fa fa-strikethrough tool-bar-icon font-modifier"
+                    command="strikeThrough"></i>
+                    <i class="fa fa-superscript tool-bar-icon font-modifier"
+                    command="superscript"></i>
+                  </div>
+                  <div class="hyperlink-tool tool-group-w-border">
+                    <i class="fa fa-link tool-bar-icon"></i>
+                    <div class="hyperlink-wrapper">
+                      <div class="hyperlink-container">
+                        <div class="title-text-container">
+                          <span class="text-label">Text</span>
+                          <input type="text" class="hyperlink-title">
+                        </div>
+                        <div class="hyperlink-text-container">
+                          <span class="hyperlink-label">Link</span>
+                          <input type="text" class="hyperlink">
+                        </div>
+                        <div class="hyperlink-submit">Apply</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="paragraph-alignment-tool">
+                    <i class="fa fa-align-left tool-bar-icon"></i>
+                    <div class="paragraph-alignment-wrapper">
+                      <div class="paragraph-alignment-container">
+                        <ul class="options">
+                          <li><i class="fa fa-align-left font-modifier"
+                            command="justifyLeft"></i></li>
+                            <li><i class="fa fa-align-center font-modifier"
+                              command="justifyCenter"></i></li>
+                              <li><i class="fa fa-align-right font-modifier"
+                                command="justifyRight"></i></li>
+                                <li><i class="fa fa-align-justify font-modifier"
+                                  command="justifyFull"></i></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+            <article class="note-body">
+              <div class="text-editor-page" contenteditable="true"></div>
             </article>
           </section>

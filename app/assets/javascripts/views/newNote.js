@@ -73,8 +73,13 @@ BetterNote.Views.NewNote = Backbone.View.extend({
   bindHyperlinkSub: function (view, selRange) {
     view.subEl(view, '.hyperlink-submit').click(function () {
       view.restoreSelection(selRange);
-      var link = view.subEl(view, 'input.hyperlink').val();
-      document.execCommand('createLink', true, link);
+      var url = view.subEl(view, 'input.hyperlink').val();
+      view.subEl(view, 'input.hyperlink').val('');
+      var regex = new RegExp("~^(?:f|ht)tps?://~i");
+      if (!regex.test(url)) {
+        url = "http://" + url;
+      }
+      document.execCommand('createLink', true, url);
     });
   },
 
