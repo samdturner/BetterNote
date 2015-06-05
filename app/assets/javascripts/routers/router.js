@@ -1,10 +1,17 @@
 BetterNote.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = $('#page-content');
+    this.notes = new BetterNote.Collections.Notes();
   },
 
   routes: {
-    'notes/new' : 'createNote'
+    'notes/new' : 'createNote',
+    'notes' : 'notesIndex'
+  },
+
+  notesIndex: function () {
+    var notesView = new BetterNote.Views.NotesIndex({ notes: this.notes });
+    this._swapViews(notesView);
   },
 
   createNote: function () {

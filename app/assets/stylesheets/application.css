@@ -27,7 +27,10 @@
    padding: 14px 0 15px;
  }
 
- .header-navbar:after {
+ .header-navbar:after,
+ header.notes-header:after,
+ div.note-info:after,
+ div.date-icon-container:after {
    content: "";
    visibility: hidden;
    display: block;
@@ -765,4 +768,145 @@ div.hyperlink-container:after {
   visibility: hidden;
   display: block;
   clear: both;
+}
+
+section.notes {
+  width: 560px;
+  margin: 0 auto 0 auto;
+}
+
+@media screen and (max-width: 920px) {
+  section.notes {
+    margin-left: 60px;
+    margin-left: 60px;
+  }
+}
+
+div.notes-container {
+  width: 100%;
+}
+
+div.notes-container {
+  margin-left: 183px;
+  height: 100%;
+  width: calc(100% - 183px);
+}
+
+header.notes-header {
+  width: 92%;
+  margin-top: 20px;
+  padding: 20px 4% 0 4%;
+  border-bottom: solid 1px #ececec;
+}
+
+header.notes-header > span {
+  color: #878787;
+  display: block;
+  vertical-align: top;
+  font-size: 21px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 26px;
+  margin-bottom: 20px;
+}
+
+div.note-info {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+div.notes-count {
+  float: left;
+  color: #ababab;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 13px;
+  font-weight: 200;
+}
+
+div.notes-sort-options {
+  float: right;
+  display: inline-block;
+  vertical-align: top;
+  color: #878787;
+  margin-right: 10px;
+  font-size: 13px;
+  color: #ababab;
+  font-weight: 200px;
+}
+
+article.note-panels-container {
+  width: 560px;
+}
+
+div.note-panel {
+  padding: 20px 4% 20px 4%;
+  border-bottom: solid 1px #ececec;
+  transition: opacity 0.1s ease-in-out;
+}
+
+div.date-icon-container {
+  display: block;
+}
+
+div.note-date {
+  color: #878787;
+  margin-bottom: 9px;
+  -webkit-font-smoothing: antialiased;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  float: left;
+}
+
+div.date-icon-container > i {
+  color: white;
+  float: right;
+  margin: 0 5px;
+  transition: color 0.2s ease;
+}
+
+div.note-title {
+  color: #4a4a4a;
+  line-height: 18px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  font-family: 'Arvo', times, serif;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+div.note-preview {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  -webkit-font-smoothing: antialiased;
+  font-family: helvetica, arial, sans-serif;
+  height: 48px;
+  overflow: hidden;
+}
+
+div.note-panel:hover {
+  background-color: rgba(43, 181, 92, 0.9);
+  cursor: pointer;
+}
+
+div.note-panel:hover div,
+div.note-panel:hover i {
+  color: white;
+}
+
+div.date-icon-container > i:hover {
+  color: black;
 }
