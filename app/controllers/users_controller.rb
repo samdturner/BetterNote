@@ -5,9 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    debugger
     if @user.save
-      debugger
       sign_in(@user)
     else
       flash.now[:errors] = @user.errors.full_messages

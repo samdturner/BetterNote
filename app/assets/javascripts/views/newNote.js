@@ -9,7 +9,9 @@ BetterNote.Views.NewNote = Backbone.View.extend({
     'click .font-modifier' : 'fontTool',
     'mouseenter .hyperlink-tool' : 'hyperlinkTool',
     'mouseleave .hyperlink-tool' : 'unbindHyperlinkSub',
-    'click a[href]' : 'bindAnchorTag'
+    'click a[href]' : 'bindAnchorTag',
+    'keyup div.text-editor-page' : 'setSaveInterval',
+    'keyup input.note-title' : 'setSaveInterval'
   },
 
   colorArr: [
@@ -106,14 +108,26 @@ BetterNote.Views.NewNote = Backbone.View.extend({
     } else if (document.selection && document.selection.createRange) {
       return document.selection.createRange();
     }
+
     return null;
+  },
+
+  setSaveInterval: function () {
+    this.$el.off('keyup', 'div.text-editor-page');
+    this.$el.off('keyup', 'input.note-title');
+    setInterval(function () {
+      var title = this.$el.find('.note-title').val();
+      var content = this.$el.find('div.text-editor-page').html();
+      this.model.save({ user_id: 1,
+                        title: title,
+                        content: content });
+      }.bind(this), 10000);
   },
 
   render: function () {
     var content = this.template({ fontStyleArr: this.fontStyleArr,
                                   fontSizeArr: this.fontSizeArr,
                                   colorArr: this.colorArr });
-
       this.$el.html(content);
 
       return this;
