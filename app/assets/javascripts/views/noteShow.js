@@ -1,28 +1,29 @@
 BetterNote.Views.NewNote = Backbone.View.extend({
-  initialize: function (options) {
-    this.notes = options.notes;
+  initialize: function () {
 
-    this.notes.each(function (note) {
-      this.add(note);
-    }.bind(this));
   },
 
   template: JST['note_show'],
+  //
+  // formatDate: function (inputFormat) {
+  //   function pad(s) { return (s < 10) ? '0' + s : s; }
+  //   var d = new Date(inputFormat);
+  //   return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+  // },
 
-  formatDate: function (inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+  formattedDate: function () {
+    var date = this.model.get('updated_at').slice(0, 10);
+    return date.slice(8, 10) + "/" + date.slice(5, 7) + "/" + date.slice(2, 4);
+  },
+
+  plainNoteContent: function () {
+    return this.model.get('content').replace(/(<([^>]+)>)/ig,"");
   },
 
   render: function () {
-    var plainNoteContent;
-    plainNoteContent = this.model.get('content').replace(/(<([^>]+)>)/ig,"");
-
-    var date = this.formatDate(this.model.get('updated_at'));
-
     var content = this.template({ note: this.model,
-                                  plainNoteContent: plainNoteContent});
+                                  plainNoteContent: this.plainNoteContent(),
+                                  date: this.formattedDate() });
     this.$el.html(content);
 
     return this;

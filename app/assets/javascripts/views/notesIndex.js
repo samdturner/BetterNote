@@ -1,12 +1,26 @@
 BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
-  initialize: function () {
+  initialize: function (options) {
+    this.notes = options.notes;
 
+    this.notes.each(function (note) {
+      this.addSubview(note);
+    }.bind(this));
+
+    this.listenTo(this.notes, 'add', this.addNote);
   },
 
   template: JST['notes_index'],
 
   events: {
     'click li[data-id]' : 'updateSortType'
+  },
+
+  addNote: function (note) {
+    var noteView = new BetterNote.Views.NewNote({
+      model: note,
+      parentView: this
+    });
+    this.addSubview('.note-panels-container', noteView);
   },
 
   writeCookie: function (name, value, days) {

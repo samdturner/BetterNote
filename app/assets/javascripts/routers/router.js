@@ -10,6 +10,7 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   },
 
   notesIndex: function () {
+    this.notes.fetch();
     var notesView = new BetterNote.Views.NotesIndex({ notes: this.notes });
     this._swapViews(notesView);
   },
