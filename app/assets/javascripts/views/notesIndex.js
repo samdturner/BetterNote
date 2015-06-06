@@ -1,4 +1,4 @@
-BetterNote.Views.NotesIndex = Backbone.View.extend({
+BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   initialize: function () {
 
   },

@@ -17,6 +17,11 @@ class Api::NotesController < ApplicationController
     end
   end
 
+  def index
+    @notes = Note.all
+    render json: @notes
+  end
+
   private
   def note_params
     params.require(:note).permit(:user_id, :notebook_id, :title, :content)

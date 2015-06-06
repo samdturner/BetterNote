@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :password_digest, length: { allow_nil: true, minimum: 6 }
   validates :email, uniqueness: true
 
+  has_many :notes, dependent: :destroy
+
   attr_reader :password
 
   after_initialize :ensure_session_token
