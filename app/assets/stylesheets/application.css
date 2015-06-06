@@ -30,7 +30,8 @@
  .header-navbar:after,
  header.notes-header:after,
  div.note-info:after,
- div.date-icon-container:after {
+ div.date-icon-container:after,
+ ul.sort-options-list > li:after {
    content: "";
    visibility: hidden;
    display: block;
@@ -136,6 +137,75 @@
 .share-btn:hover span,
 .share-btn:hover i.fa-caret-down {
   color: #2dbe60;
+}
+
+div.sort-options-dropdown {
+  border-radius: 0 0 4px 4px;
+  border: 3px solid rgba(217, 217, 217, 0.4);
+  border-top: 1px solid rgba(217, 217, 217, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04),
+              -6px 8px 15px rgba(0, 0, 0, 0.04),
+              6px 8px 15px rgba(0, 0, 0, 0.04);
+  position: absolute;
+  z-index: -1;
+  background-color: white;
+  visibility: hidden;
+}
+
+div.notes-sort-options:hover {
+  cursor: pointer;
+}
+
+div.notes-sort-options:hover > div.sort-options-dropdown {
+  visibility: visible;
+  z-index: 1;
+}
+
+ul.sort-options-list {
+  padding: 12px 0;
+  width: 223px;
+}
+
+ul.sort-options-list > li {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+}
+
+ul.sort-options-list > li > i {
+  color: white;
+}
+
+ul.sort-options-list > li:hover {
+  cursor: pointer;
+  background-color: #2dbe60;
+}
+
+ul.sort-options-list > li:hover > span {
+  color: white;
+}
+
+ul.sort-options-list > li:hover > i {
+  color: #2dbe60;
+}
+
+ul.sort-options-list > li.selected > span,
+ul.sort-options-list > li.selected > i {
+  color: #2dbe60;
+}
+
+ul.sort-options-list > li.selected:hover > span,
+ul.sort-options-list > li.selected:hover > i {
+  color: white;
+}
+
+span.sort-option-field {
+  float: left;
+}
+
+i.sort-option-check {
+  float: right;
 }
 
 .share-btn:hover {
