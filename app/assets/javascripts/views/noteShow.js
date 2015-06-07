@@ -4,12 +4,6 @@ BetterNote.Views.NewNote = Backbone.View.extend({
   },
 
   template: JST['note_show'],
-  //
-  // formatDate: function (inputFormat) {
-  //   function pad(s) { return (s < 10) ? '0' + s : s; }
-  //   var d = new Date(inputFormat);
-  //   return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
-  // },
 
   formattedDate: function () {
     var date = this.model.get('updated_at').slice(0, 10);

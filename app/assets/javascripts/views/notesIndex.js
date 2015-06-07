@@ -2,11 +2,10 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.notes = options.notes;
 
-    this.notes.each(function (note) {
-      this.addSubview(note);
-    }.bind(this));
+    this.addAllNotes();
 
     this.listenTo(this.notes, 'add', this.addNote);
+    this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
   template: JST['notes_index'],
@@ -15,12 +14,54 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     'click li[data-id]' : 'updateSortType'
   },
 
+  fetchNotes: function (id, isReset) {
+    var sortCols = ['created_at', 'updated_at', 'title'];
+    var idx = Math.floor(id / 2);
+    var sortCol = sortCols[idx];
+
+    var asc_desc = id % 2 == 0 ? 'ASC' : 'DESC';
+
+    this.notes.fetch({ data: $.param({ asc_desc: asc_desc,
+                                       sort_col: sortCol }),
+                       reset: isReset });
+  },
+
+  addAllNotes: function () {
+    this.notes.each( function (note) {
+      this.addNote(note);
+    }.bind(this));
+  },
+
   addNote: function (note) {
     var noteView = new BetterNote.Views.NewNote({
       model: note,
       parentView: this
     });
     this.addSubview('.note-panels-container', noteView);
+  },
+
+  removeAllNotes: function () {
+    var notePanels = this.subviews('.note-panels-container');
+    while ( notePanels.length > 0) {
+      noteView = this.subviews('.note-panels-container')[0];
+      this.removeSubview('.note-panels-container', noteView);
+    }
+
+    this.notes
+  },
+
+  resetNotes: function () {
+    // debugger
+    this.removeAllNotes();
+    this.addAllNotes();
+  },
+
+  removeNote: function (note) {
+    this.subviews('.note-panels-container').forEach( function (noteView) {
+      if(note.get('id') === noteView.model.get('id')) {
+        this.removeSubview('.note-panels-container', noteView);
+      }
+    }.bind(this));
   },
 
   writeCookie: function (name, value, days) {
@@ -51,7 +92,7 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
 
   updateSortTitle: function (id) {
     var type;
-    type = id > 4 ?  "title" : "date";
+    type = id > 3 ?  "title" : "date";
     this.$el.find('b.sort-type').html(type);
   },
 
@@ -61,6 +102,7 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     this.$el.find('[data-id=' + id + ']').addClass('selected');
     this.updateSortTitle(id);
     this.writeCookie('sortType', 127, 30);
+    this.fetchNotes(id, true);
   },
 
   render: function () {
