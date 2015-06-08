@@ -21,7 +21,8 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   },
 
   search: function () {
-    
+    var notesSearchView = new BetterNote.Views.NotesSearch({ notes: this.notes });
+    this._swapViews(notesSearchView);
   },
 
   _swapViews: function (view) {
