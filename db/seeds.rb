@@ -11,7 +11,7 @@ User.delete_all
 
 user = User.create!(email: 'example', password: 'password')
 
-20.times do
+50.times do
   Note.create!(user_id: user.id, title: Faker::Lorem.word,
                content: Faker::Lorem.paragraph)
 end

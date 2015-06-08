@@ -1,6 +1,13 @@
 BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   initialize: function (options) {
-    this.notes = options.notes;
+    this.notes = new BetterNote.Collections.Notes();
+    this.noteCount = 0;
+
+    this.sortColIdx = this.readCookie('sortColIdx') || 0;
+    this.fetchNotes(this.sortColIdx, true);
+
+    _.bindAll(this, 'detectScroll');
+    $(window).scroll(this.detectScroll);
 
     this.addAllNotes();
 
@@ -14,30 +21,19 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     'click li[data-id]' : 'updateSortType'
   },
 
-  fetchNotes: function (id, isReset) {
-    var sortCols = ['created_at', 'updated_at', 'title'];
-    var idx = Math.floor(id / 2);
-    var sortCol = sortCols[idx];
-
-    var asc_desc = id % 2 == 0 ? 'ASC' : 'DESC';
-
-    this.notes.fetch({ data: $.param({ asc_desc: asc_desc,
-                                       sort_col: sortCol }),
-                       reset: isReset });
-  },
-
-  addAllNotes: function () {
-    this.notes.each( function (note) {
-      this.addNote(note);
-    }.bind(this));
-  },
-
+  //updating the view models on the page
   addNote: function (note) {
     var noteView = new BetterNote.Views.NewNote({
       model: note,
       parentView: this
     });
     this.addSubview('.note-panels-container', noteView);
+  },
+
+  addAllNotes: function () {
+    this.notes.each( function (note) {
+      this.addNote(note);
+    }.bind(this));
   },
 
   removeAllNotes: function () {
@@ -51,7 +47,6 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   },
 
   resetNotes: function () {
-    // debugger
     this.removeAllNotes();
     this.addAllNotes();
   },
@@ -64,10 +59,57 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     }.bind(this));
   },
 
+  //automatic scrolling
+  detectScroll: function () {
+    if( $(window).scrollTop() + $(window).innerHeight() >= document.body.scrollHeight ) {
+      this.loadAdditionalNotes();
+    }
+  },
+
+  loadAdditionalNotes: function () {
+    var currentId = this.$el.find('li.selected').data('id');
+    this.fetchNotes(currentId, false);
+  },
+
+  //user changes the sort type
+  updateSortTitle: function (id) {
+    var type;
+    type = id > 3 ?  "title" : "date";
+    this.$el.find('b.sort-type').html(type);
+  },
+
+  updateSortType: function (e) {
+    var id = $(e.currentTarget).data('id')
+    this.$el.find('li.selected').removeClass('selected');
+    this.$el.find('[data-id=' + id + ']').addClass('selected');
+    this.updateSortTitle(id);
+    this.writeCookie('sortColIdx', id, 30);
+
+    this.noteCount = 0;
+    this.fetchNotes(id, true);
+  },
+
+  fetchNotes: function (id, isReset) {
+    var sortCols = ['created_at', 'updated_at', 'title'];
+    var idx = Math.floor(id / 2);
+    var sortCol = sortCols[idx];
+
+    var asc_desc = id % 2 == 0 ? 'ASC' : 'DESC';
+
+    this.notes.fetch({ data: $.param({ asc_desc: asc_desc,
+                                       sort_col: sortCol,
+                                       start_row: this.noteCount }),
+                       reset: isReset,
+                       success: function () {
+                         this.noteCount += 10;
+                       }.bind(this) });
+  },
+
+  //reading and writing the cookie which stores the sort type
   writeCookie: function (name, value, days) {
     if (days) {
         var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         var expires = "; expires=" + date.toGMTString();
     } else {
         expires = "";
@@ -90,24 +132,11 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     return '';
   },
 
-  updateSortTitle: function (id) {
-    var type;
-    type = id > 3 ?  "title" : "date";
-    this.$el.find('b.sort-type').html(type);
-  },
-
-  updateSortType: function (e) {
-    var id = $(e.currentTarget).data('id')
-    this.$el.find('li.selected').removeClass('selected');
-    this.$el.find('[data-id=' + id + ']').addClass('selected');
-    this.updateSortTitle(id);
-    this.writeCookie('sortType', 127, 30);
-    this.fetchNotes(id, true);
-  },
-
   render: function () {
     var content = this.template();
     this.$el.html(content);
+    this.$el.find('[data-id=' + this.sortColIdx + ']').addClass('selected');
+    this.updateSortTitle(this.sortColIdx);
 
     return this;
   }

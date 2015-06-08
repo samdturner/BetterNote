@@ -1,7 +1,6 @@
 BetterNote.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = $('#page-content');
-    this.notes = new BetterNote.Collections.Notes();
   },
 
   routes: {
@@ -10,7 +9,6 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   },
 
   notesIndex: function () {
-    this.notes.fetch();
     var notesView = new BetterNote.Views.NotesIndex({ notes: this.notes });
     this._swapViews(notesView);
   },

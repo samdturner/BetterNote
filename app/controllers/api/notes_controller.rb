@@ -18,13 +18,15 @@ class Api::NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.created_date(params[:sort_col], params[:asc_desc])
+    @notes = Note.created_date(params[:sort_col], params[:asc_desc],
+                               params[:start_row])
     render json: @notes
   end
 
   private
   def note_params
     params.require(:note).permit(:user_id, :notebook_id, :title,
-                                 :content, :sort_col, :asec_desc)
+                                 :content, :sort_col, :asec_desc,
+                                 :start_row)
   end
 end
