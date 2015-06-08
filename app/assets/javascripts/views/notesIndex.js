@@ -15,7 +15,7 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
-  template: JST['notes_index'],
+  template: JST['notes_search'],
 
   events: {
     'click li[data-id]' : 'updateSortType'
@@ -23,7 +23,7 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
 
   //updating the view models on the page
   addNote: function (note) {
-    var noteView = new BetterNote.Views.NewNote({
+    var noteView = new BetterNote.Views.NoteShow({
       model: note,
       parentView: this
     });

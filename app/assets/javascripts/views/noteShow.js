@@ -1,4 +1,4 @@
-BetterNote.Views.NewNote = Backbone.View.extend({
+BetterNote.Views.NoteShow = Backbone.View.extend({
   initialize: function () {
 
   },

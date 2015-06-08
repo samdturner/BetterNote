@@ -59,28 +59,41 @@ input[type="submit"] {
   clear: both;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+input.note-title::-webkit-input-placeholder { /* WebKit browsers */
     color: #2dbe60;
     font-family: 'Roboto', helvetica, arial, sans-serif;
     font-weight: 100;
     font-size: 28px;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+input.note-title:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
    color: #2dbe60;
    opacity: 1;
    font-weight: 300;
    font-family: 'Arvo', times, serif;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+input.note-title::-moz-placeholder { /* Mozilla Firefox 19+ */
    color: #2dbe60;
    opacity: 1;
    font-weight: 300;
    font-family: 'Arvo', times, serif;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+input.note-title:-ms-input-placeholder { /* Internet Explorer 10+ */
    color: #2dbe60;
    font-weight: 300;
    font-family: 'Arvo', times, serif;
+}
+
+input.search-bar::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ECECEC;
+}
+input.search-bar:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #ECECEC;
+}
+input.search-bar::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #ECECEC;
+}
+input.search-bar:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color: #ECECEC;
 }
 
 ::selection {
