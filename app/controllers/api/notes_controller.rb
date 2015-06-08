@@ -18,9 +18,14 @@ class Api::NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.created_date(params[:sort_col], params[:asc_desc],
-                               params[:start_row])
-    render json: @notes
+    if params[:sort_col]
+      @notes = Note.select_notes(params[:sort_col], params[:asc_desc],
+                                 params[:start_row])
+      render json: @notes
+    elsif params[:substr]
+      @notes = Note.all
+      render json: @notes.select { |note| note.contains_substr?(params[:substr]) }
+    end
   end
 
   private

@@ -18,7 +18,8 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   template: JST['notes_search'],
 
   events: {
-    'click li[data-id]' : 'updateSortType'
+    'click li[data-id]' : 'updateSortType',
+    'keyup .search-bar' : 'processKey'
   },
 
   //updating the view models on the page
@@ -103,6 +104,16 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
                        success: function () {
                          this.noteCount += 10;
                        }.bind(this) });
+  },
+
+  //user types in the search box
+  processKey: function (e) {
+    if(e.which === 13) {
+      var substr = this.$el.find('.search-bar').val();
+      this.notes.fetch({ data: $.param({ substr: substr }),
+                         reset: true
+                         });
+    }
   },
 
   //reading and writing the cookie which stores the sort type
