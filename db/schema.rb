@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606193922) do
+ActiveRecord::Schema.define(version: 20150609180804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notebooks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.integer  "user_id",                            null: false
@@ -36,5 +43,7 @@ ActiveRecord::Schema.define(version: 20150606193922) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
 
+  add_foreign_key "notebooks", "users"
+  add_foreign_key "notes", "notebooks"
   add_foreign_key "notes", "users"
 end

@@ -1,4 +1,4 @@
-BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
+BetterNote.Views.NotesSort = Backbone.NotesIndex.extend({
   initialize: function (options) {
     this.notes = new BetterNote.Collections.Notes();
     this.noteCount = 0;
@@ -15,7 +15,7 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
     this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
-  template: JST['notes_index'],
+  template: [JST['items_container'], JST['notes_header']],
 
   events: {
     'click li[data-id]' : 'updateSortType'
@@ -23,40 +23,11 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
 
   //updating the view models on the page
   addNote: function (note) {
-    var noteView = new BetterNote.Views.NoteShow({
+    var noteView = new BetterNote.Views.NotePanel({
       model: note,
       parentView: this
     });
-    this.addSubview('.note-panels-container', noteView);
-  },
-
-  addAllNotes: function () {
-    this.notes.each( function (note) {
-      this.addNote(note);
-    }.bind(this));
-  },
-
-  removeAllNotes: function () {
-    var notePanels = this.subviews('.note-panels-container');
-    while ( notePanels.length > 0) {
-      noteView = this.subviews('.note-panels-container')[0];
-      this.removeSubview('.note-panels-container', noteView);
-    }
-
-    this.notes
-  },
-
-  resetNotes: function () {
-    this.removeAllNotes();
-    this.addAllNotes();
-  },
-
-  removeNote: function (note) {
-    this.subviews('.note-panels-container').forEach( function (noteView) {
-      if(note.get('id') === noteView.model.get('id')) {
-        this.removeSubview('.note-panels-container', noteView);
-      }
-    }.bind(this));
+    this.addSubview('.item-panels-container', noteView);
   },
 
   //automatic scrolling
@@ -133,8 +104,12 @@ BetterNote.Views.NotesIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    var content = this.template();
-    this.$el.html(content);
+    var itemsContainer = this.template[0]();
+    this.$el.html(itemsContainer);
+
+    var notesHeader = this.template[1]();
+    this.$el.find('section.items').prepend(notesHeader);
+
     this.$el.find('[data-id=' + this.sortColIdx + ']').addClass('selected');
     this.updateSortTitle(this.sortColIdx);
 

@@ -1,4 +1,4 @@
-BetterNote.Views.NotesSearch = Backbone.CompositeView.extend({
+BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
   initialize: function (options) {
     this.notes = new BetterNote.Collections.Notes();
 
@@ -14,40 +14,11 @@ BetterNote.Views.NotesSearch = Backbone.CompositeView.extend({
 
   //updating the view models on the page
   addNote: function (note) {
-    var noteView = new BetterNote.Views.NoteShow({
+    var noteView = new BetterNote.Views.NotePanel({
       model: note,
       parentView: this
     });
-    this.addSubview('.note-panels-container', noteView);
-  },
-
-  addAllNotes: function () {
-    this.notes.each( function (note) {
-      this.addNote(note);
-    }.bind(this));
-  },
-
-  removeAllNotes: function () {
-    var notePanels = this.subviews('.note-panels-container');
-    while ( notePanels.length > 0) {
-      noteView = this.subviews('.note-panels-container')[0];
-      this.removeSubview('.note-panels-container', noteView);
-    }
-
-    this.notes
-  },
-
-  resetNotes: function () {
-    this.removeAllNotes();
-    this.addAllNotes();
-  },
-
-  removeNote: function (note) {
-    this.subviews('.note-panels-container').forEach( function (noteView) {
-      if(note.get('id') === noteView.model.get('id')) {
-        this.removeSubview('.note-panels-container', noteView);
-      }
-    }.bind(this));
+    this.addSubview('.item-panels-container', noteView);
   },
 
   //user types in the search box

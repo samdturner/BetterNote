@@ -17,7 +17,8 @@
 //= require backbone
 //= require betternote
 //= require_tree ../templates
-//= require_tree ./utils
+//= require ./utils/composite_view
+//= require ./utils/notesIndex
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

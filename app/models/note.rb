@@ -2,6 +2,7 @@ class Note < ActiveRecord::Base
   validates :user_id, presence: true
 
   belongs_to :user
+  belongs_to :notebook
 
   def self.select_notes(sort_col, asc_desc, start_row)
     sort_col = sort_col || "created_at"
