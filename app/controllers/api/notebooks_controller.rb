@@ -1,8 +1,9 @@
 class Api::NotebooksController < ApplicationController
   def index
     @notebooks = Notebook.all
-    if (substr = params[:substr])
-      @notebook = @notebooks.select do |notebook|
+    substr = params[:substr]
+    if (substr && substr != "" )
+      @notebooks = @notebooks.select do |notebook|
         notebook.contains_substr?(substr)
       end
     end

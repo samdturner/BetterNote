@@ -3,7 +3,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     this.notebooks = new BetterNote.Collections.Notebooks();
     this.notebooks.fetch();
 
-    this.listenTo(this.notebooks, 'add', this.addNotebook);
+    this.listenTo(this.notebooks, 'add', this.addView);
     this.listenTo(this.notebooks, 'reset', this.resetNotebooks);
   },
 
@@ -47,11 +47,19 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
   fontSizeArr: ["8", "10", "14", "20", "24", "36", "48"],
 
-  addNotebook: function (notebook) {
+
+  //manage notebook options
+  addView: function (notebook) {
     var notebookView = new BetterNote.Views.NotebookOption({
       model: notebook
     });
     this.addSubview('.notebook-options', notebookView);
+  },
+
+
+  resetNotebooks: function () {
+    this.removeAllViews('.notebook-options');
+    this.addAllViews(this.notebooks);
   },
 
   //user types in the search box

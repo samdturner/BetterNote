@@ -18,6 +18,6 @@ class Note < ActiveRecord::Base
   end
 
   def contains_substr?(substr)
-    substr_match?(self.title, substr) || substr_match?(self.content, substr)
+    substr_match?(substr, self.title) || substr_match?(substr, self.content)
   end
 end

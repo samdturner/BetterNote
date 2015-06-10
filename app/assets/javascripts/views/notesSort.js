@@ -12,7 +12,7 @@ BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
     this.addAllViews(this.notes);
 
     this.listenTo(this.notes, 'add', this.addView);
-    this.listenTo(this.notes, 'reset', this.resetViews);
+    this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
   template: [JST['items_container'], JST['notes/header']],
@@ -30,7 +30,7 @@ BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
     this.addSubview('.item-panels-container', noteView);
   },
 
-  resetViews: function () {
+  resetNotes: function () {
     this.removeAllViews('.item-panels-container');
     this.addAllViews(this.notes);
   },

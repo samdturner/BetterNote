@@ -3,14 +3,14 @@ BetterNote.Views.NotesSearch = Backbone.CompositeView.extend({
     this.notes = new BetterNote.Collections.Notes();
 
     this.listenTo(this.notes, 'add', this.addView);
-    this.listenTo(this.notes, 'reset', this.resetViews);
+    this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
   template: [
               JST['notes_search/bar'],
               JST['items_container'],
               JST['notes_search/header']
-                                      ],
+                                        ],
 
   events: {
     'keyup .search-bar' : 'processKey'
@@ -35,7 +35,7 @@ BetterNote.Views.NotesSearch = Backbone.CompositeView.extend({
     }
   },
 
-  resetViews: function () {
+  resetNotes: function () {
     this.removeAllViews('.item-panels-container');
     this.addAllViews(this.notes);
   },

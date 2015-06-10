@@ -216,6 +216,10 @@ i.sort-option-check {
   border-color: #2dbe60;
 }
 
+.create-notebook-group {
+  position: relative;
+}
+
 .create-notebook-group:hover {
   cursor: pointer;
 }
@@ -1088,6 +1092,12 @@ span.create-notebook {
   font-weight: 500;
 }
 
+li.create-notebook-group:hover > div.notebook-options-container {
+  z-index: 2;
+  visibility: visible;
+
+}
+
 div.notebook-options-container {
   background-color: white;
   overflow: scroll;
@@ -1096,6 +1106,10 @@ div.notebook-options-container {
   border-top: 1px solid rgba(217, 217, 217, 0.4);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
   width: 330px;
+  position: absolute;
+  z-index: -5;
+  bottom: -355px;
+  visibility: hidden;
 }
 
 ul.notebook-options > li > span {
@@ -1137,5 +1151,9 @@ ul.notebook-options > li:hover > span {
 }
 
 ul.notebook-options > li:hover > div.bottom-border {
+  background-color: transparent;
+}
+
+ul.notebook-options > li:last-child > div.bottom-border {
   background-color: transparent;
 }

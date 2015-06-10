@@ -1,5 +1,5 @@
 module CommonSubstring
-  def substr_match?(body, substr)
+  def substr_match?(substr, body)
     m = i = 0
     body_length = body.length
     substr_length = substr.length
