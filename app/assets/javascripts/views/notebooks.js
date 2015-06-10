@@ -6,7 +6,7 @@ BetterNote.Views.Notebooks = Backbone.CompositeView.extend({
     this.listenTo(this.notebooks, 'add', this.addNotebook);
   },
 
-  template: [JST['items_container'], JST['notebooks_header']],
+  template: [JST['items_container'], JST['notebooks/header']],
 
   //updating the view models on the page
   addNotebook: function (notebook) {

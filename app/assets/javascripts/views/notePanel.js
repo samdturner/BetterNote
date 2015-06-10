@@ -3,7 +3,7 @@ BetterNote.Views.NotePanel = Backbone.View.extend({
 
   },
 
-  template: JST['note_panel'],
+  template: JST['notes/panel'],
 
   formattedDate: function () {
     var date = this.model.get('updated_at').slice(0, 10);

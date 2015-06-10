@@ -6,7 +6,11 @@ BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
     this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
-  template: JST['notes_search'],
+  template: [
+              JST['notes_search/bar'],
+              JST['items_container'],
+              JST['notes_search/header']
+                                      ],
 
   events: {
     'keyup .search-bar' : 'processKey'
@@ -32,9 +36,14 @@ BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
   },
 
   render: function () {
-    var content = this.template();
-    this.$el.html(content);
+    var searchBar = this.template[0]();
+    this.$el.html(searchBar);
 
+    var itemsContainer = this.template[1]();
+    this.$el.append(itemsContainer);
+
+    var searchHeader = this.template[2]();
+    this.$el.find('section.items').prepend(searchHeader);
     return this;
   }
 })

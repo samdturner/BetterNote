@@ -15,7 +15,7 @@ BetterNote.Views.NotesSort = Backbone.NotesIndex.extend({
     this.listenTo(this.notes, 'reset', this.resetNotes);
   },
 
-  template: [JST['items_container'], JST['notes_header']],
+  template: [JST['items_container'], JST['notes/header']],
 
   events: {
     'click li[data-id]' : 'updateSortType'

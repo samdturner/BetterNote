@@ -871,7 +871,7 @@ header.items-header {
 
 header.items-header > span {
   color: #878787;
-  display: block;
+  display: inline-block;
   vertical-align: top;
   font-size: 21px;
   letter-spacing: 0.5px;
@@ -994,4 +994,16 @@ div.search-bar-container {
   font-family: "Roboto", helvetica, arial, sans-serif;
   color: #606060;
   font-weight: 400;
+}
+
+header.items-header > i.fa-plus-square-o {
+  float: right;
+  font-size: 40px;
+  display: inline-block;
+  color: #4a4a4a;
+}
+
+header.items-header > i.fa-plus-square-o:hover {
+  color: rgba(43, 181, 92, 0.9);
+  cursor: pointer;
 }
