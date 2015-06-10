@@ -1,9 +1,13 @@
-BetterNote.Views.NewNote = Backbone.View.extend({
+BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   initialize: function () {
+    this.notebooks = new BetterNote.Collections.Notebooks();
+    this.notebooks.fetch();
 
+    this.listenTo(this.notebooks, 'add', this.addNotebook);
+    this.listenTo(this.notebooks, 'reset', this.resetNotebooks);
   },
 
-  template: JST['new_note'],
+  template: [JST['notes/new'], JST['notes/notebook_options_container']],
 
   events: {
     'click .font-modifier' : 'fontTool',
@@ -11,7 +15,8 @@ BetterNote.Views.NewNote = Backbone.View.extend({
     'mouseleave .hyperlink-tool' : 'unbindHyperlinkSub',
     'click a[href]' : 'bindAnchorTag',
     'keyup div.text-editor-page' : 'setSaveInterval',
-    'keyup input.note-title' : 'setSaveInterval'
+    'keyup input.note-title' : 'setSaveInterval',
+    'keyup input.notebook-search-field' : 'processKey'
   },
 
   colorArr: [
@@ -38,9 +43,26 @@ BetterNote.Views.NewNote = Backbone.View.extend({
   ],
 
   fontStyleArr: ["Gotham", "Georgia", "Helvetica", "Courier New",
-  "Times New Roman", "Trebuchet", "Verdana"],
+                "Times New Roman", "Trebuchet", "Verdana"],
 
   fontSizeArr: ["8", "10", "14", "20", "24", "36", "48"],
+
+  addNotebook: function (notebook) {
+    var notebookView = new BetterNote.Views.NotebookOption({
+      model: notebook
+    });
+    this.addSubview('.notebook-options', notebookView);
+  },
+
+  //user types in the search box
+  processKey: function (e) {
+    if(e.which === 13) {
+      var substr = this.$el.find('.notebook-search-field').val();
+      this.notebooks.fetch({ data: $.param({ substr: substr }),
+                         reset: true
+                         });
+    }
+  },
 
   goto: function (form) {
     var index = form.select.selectedIndex
@@ -125,11 +147,15 @@ BetterNote.Views.NewNote = Backbone.View.extend({
   },
 
   render: function () {
-    var content = this.template({ fontStyleArr: this.fontStyleArr,
+    var content = this.template[0]({ fontStyleArr: this.fontStyleArr,
                                   fontSizeArr: this.fontSizeArr,
                                   colorArr: this.colorArr });
-      this.$el.html(content);
+    this.$el.html(content);
 
-      return this;
-    }
-  })
+    var notebookOptions = this.template[1]();
+    this.$el.find('li.create-notebook-group').append(notebookOptions);
+
+
+    return this;
+  }
+})

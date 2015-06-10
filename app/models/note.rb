@@ -1,4 +1,8 @@
+require 'common_substring'
+
 class Note < ActiveRecord::Base
+  include CommonSubstring
+
   validates :user_id, presence: true
 
   belongs_to :user
@@ -14,46 +18,6 @@ class Note < ActiveRecord::Base
   end
 
   def contains_substr?(substr)
-    self.substr_match?(:title, substr) || self.substr_match?(:content, substr)
-  end
-
-  def substr_match?(section, substr)
-    m = i = 0
-    body = section == :title ? self.title : self.content
-    body_length = body.length
-    substr_length = substr.length
-    t = kmp_table(substr)
-    while m + i < body_length
-      if substr[i] == body[m + i]
-        i += 1
-        return true if i == substr_length
-      else
-        m += i - t[i]
-        i = [0, t[i]].max
-      end
-    end
-
-    false
-  end
-
-  def kmp_table(w)
-    pos = 2
-    cnd = 0
-    t = [-1, 0]
-    wlen = w.length
-    while pos < wlen
-      if w[pos-1] == w[cnd]
-        cnd += 1
-        t[pos] = cnd
-        pos += 1
-      elsif cnd > 0
-        cnd = t[cnd]
-      else
-        t[pos] = 0
-        pos += 1
-      end
-    end
-
-    t
+    substr_match?(self.title, substr) || substr_match?(self.content, substr)
   end
 end

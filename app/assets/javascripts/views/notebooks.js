@@ -6,7 +6,15 @@ BetterNote.Views.Notebooks = Backbone.CompositeView.extend({
     this.listenTo(this.notebooks, 'add', this.addNotebook);
   },
 
+  events: {
+    'click i.fa-plus-square-o' : 'newNote'
+  },
+
   template: [JST['items_container'], JST['notebooks/header']],
+
+  newNote: function () {
+    Backbone.history.navigate("notebooks/new", { trigger: true });
+  },
 
   //updating the view models on the page
   addNotebook: function (notebook) {

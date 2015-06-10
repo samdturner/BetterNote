@@ -1,4 +1,4 @@
-BetterNote.Views.NotesSort = Backbone.NotesIndex.extend({
+BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.notes = new BetterNote.Collections.Notes();
     this.noteCount = 0;
@@ -9,10 +9,10 @@ BetterNote.Views.NotesSort = Backbone.NotesIndex.extend({
     _.bindAll(this, 'detectScroll');
     $(window).scroll(this.detectScroll);
 
-    this.addAllNotes();
+    this.addAllViews(this.notes);
 
-    this.listenTo(this.notes, 'add', this.addNote);
-    this.listenTo(this.notes, 'reset', this.resetNotes);
+    this.listenTo(this.notes, 'add', this.addView);
+    this.listenTo(this.notes, 'reset', this.resetViews);
   },
 
   template: [JST['items_container'], JST['notes/header']],
@@ -22,12 +22,17 @@ BetterNote.Views.NotesSort = Backbone.NotesIndex.extend({
   },
 
   //updating the view models on the page
-  addNote: function (note) {
+  addView: function (note) {
     var noteView = new BetterNote.Views.NotePanel({
       model: note,
       parentView: this
     });
     this.addSubview('.item-panels-container', noteView);
+  },
+
+  resetViews: function () {
+    this.removeAllViews('.item-panels-container');
+    this.addAllViews(this.notes);
   },
 
   //automatic scrolling

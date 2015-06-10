@@ -1,9 +1,9 @@
-BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
+BetterNote.Views.NotesSearch = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.notes = new BetterNote.Collections.Notes();
 
-    this.listenTo(this.notes, 'add', this.addNote);
-    this.listenTo(this.notes, 'reset', this.resetNotes);
+    this.listenTo(this.notes, 'add', this.addView);
+    this.listenTo(this.notes, 'reset', this.resetViews);
   },
 
   template: [
@@ -17,7 +17,7 @@ BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
   },
 
   //updating the view models on the page
-  addNote: function (note) {
+  addView: function (note) {
     var noteView = new BetterNote.Views.NotePanel({
       model: note,
       parentView: this
@@ -33,6 +33,11 @@ BetterNote.Views.NotesSearch = Backbone.NotesIndex.extend({
                          reset: true
                          });
     }
+  },
+
+  resetViews: function () {
+    this.removeAllViews('.item-panels-container');
+    this.addAllViews(this.notes);
   },
 
   render: function () {

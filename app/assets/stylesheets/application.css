@@ -1007,3 +1007,135 @@ header.items-header > i.fa-plus-square-o:hover {
   color: rgba(43, 181, 92, 0.9);
   cursor: pointer;
 }
+
+/* Create new notebook page */
+section.new-notebook-container {
+  width: 395px;
+  margin: 0 auto 0 auto;
+}
+
+header.new-notebook {
+  height: 90px;
+  margin-top: 60px;
+  margin-left: 90px;
+  margin-right: 90px;
+  border-bottom: solid 1px #ececec;
+}
+
+header.new-notebook > i.fa-book {
+  font-size: 30px;
+  display: block;
+  color: #878787;
+  margin: 0 auto 0 auto;
+  width: 30px;
+}
+
+header.new-notebook > div {
+  display: block;
+  color: black;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 auto 0 auto;
+  width: 145px;
+  margin-top: 24px;
+}
+
+input.notebook-name {
+  display: block;
+  width: 280px;
+  margin: 0 auto 60px auto;
+  height: 40px;
+  margin-top: 50px;
+  line-height: 38px;
+  color: #2dbe60;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-size: 28px;
+}
+
+span.cancel-notebook {
+  color: #606060;
+  background-color: #ececec;
+  border: 1px solid #d9d9d9;
+}
+
+span.cancel-notebook:hover {
+  background-color: #d9d9d9;;
+}
+
+span.create-notebook {
+  color: white;
+  border: 1px solid #2dbe60;
+  background-color: #2dbe60;
+}
+
+span.create-notebook:hover {
+  background-color: #28a955;
+}
+
+span.cancel-notebook,
+span.create-notebook {
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 0 4px;
+  padding: 9px 71px;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+div.notebook-options-container {
+  background-color: white;
+  overflow: scroll;
+  max-height: 500px;
+  border: 3px solid rgba(217, 217, 217, 0.4);
+  border-top: 1px solid rgba(217, 217, 217, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+  width: 330px;
+}
+
+ul.notebook-options > li > span {
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 15px 20px 15px 15px;
+  display: block;
+  font-family: helvetica, arial, sans-serif;
+}
+
+li {
+  padding: 0 16px;
+}
+
+div.bottom-border {
+  width: 100%;
+  height: 1px;
+  background-color: #ececec;
+}
+
+input.notebook-search-field {
+  margin: 16px;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  padding: 10px 8px 9px;
+  width: calc(100% - 50px);
+}
+
+ul.notebook-options > li:hover {
+  background-color: rgba(43, 181, 92, 0.9);
+}
+
+ul.notebook-options > li:hover > span {
+  color: white;
+}
+
+ul.notebook-options > li:hover > div.bottom-border {
+  background-color: transparent;
+}

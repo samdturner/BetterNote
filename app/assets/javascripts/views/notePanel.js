@@ -1,8 +1,4 @@
 BetterNote.Views.NotePanel = Backbone.View.extend({
-  initialize: function () {
-
-  },
-
   template: JST['notes/panel'],
 
   formattedDate: function () {

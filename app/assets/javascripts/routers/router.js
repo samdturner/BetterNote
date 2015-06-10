@@ -7,7 +7,8 @@ BetterNote.Routers.Router = Backbone.Router.extend({
     'notes/new' : 'createNote',
     'notes' : 'notesSort',
     'search' : 'notesSearch',
-    'notebooks' : 'notebooks'
+    'notebooks' : 'notebooks',
+    'notebooks/new' : 'createNotebook'
   },
 
   createNote: function () {
@@ -29,6 +30,11 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   notebooks: function () {
     var notesView = new BetterNote.Views.Notebooks();
     this._swapViews(notesView);
+  },
+
+  createNotebook: function () {
+    var newNotebooksView = new BetterNote.Views.NewNotebook();
+    this._swapViews(newNotebooksView);
   },
 
   _swapViews: function (view) {
