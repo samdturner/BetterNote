@@ -12,8 +12,7 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   },
 
   createNote: function () {
-    var newNote = new BetterNote.Models.Note();
-    var newNoteView = new BetterNote.Views.NewNote({ model: newNote });
+    var newNoteView = new BetterNote.Views.NewNote();
     this._swapViews(newNoteView);
   },
 

@@ -1,6 +1,7 @@
 BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   initialize: function () {
     this.note = new BetterNote.Models.Note();
+    this.typeCount = 10;
 
     this.notebooks = new BetterNote.Collections.Notebooks();
     this.notebooks.fetch();
@@ -16,8 +17,8 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     'mouseenter .hyperlink-tool' : 'hyperlinkTool',
     'mouseleave .hyperlink-tool' : 'unbindHyperlinkSub',
     'click a[href]' : 'bindAnchorTag',
-    'keyup div.text-editor-page' : 'setSaveInterval',
-    'keyup input.note-title' : 'setSaveInterval',
+    'keyup div.text-editor-page' : 'processNoteUpdate',
+    'keyup input.note-title' : 'processNoteUpdate',
     'keyup input.notebook-search-field' : 'processKey',
     'click li.notebook-option' : 'reassignNotebook'
   },
@@ -88,7 +89,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     this.$el.find('i.fa-check').remove();
   },
 
-  //user types in the search box
+  //user types in the notebook search box
   processKey: function (e) {
     if(e.which === 13) {
       var substr = this.$el.find('.notebook-search-field').val();
@@ -168,20 +169,16 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     return null;
   },
 
-  // saveNote: function () {
-  //
-  // },
-
-  setSaveInterval: function () {
-    this.$el.off('keyup', 'div.text-editor-page');
-    this.$el.off('keyup', 'input.note-title');
-    setInterval(function () {
+  processNoteUpdate: function () {
+    if(this.typeCount === 10) {
       var title = this.$el.find('.note-title').val();
       var content = this.$el.find('div.text-editor-page').html();
-      this.model.save({ user_id: 1,
-                        title: title,
+      this.model.save({ title: title,
                         content: content });
-      }.bind(this), 10000);
+      this.typeCount = 0;
+    } else {
+      this.typeCount++;
+    }
   },
 
   render: function () {
