@@ -1,6 +1,8 @@
 class Api::NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
+    @note.user_id = User.first.id
+    debugger
     if @note.save
       render json: @note
     else

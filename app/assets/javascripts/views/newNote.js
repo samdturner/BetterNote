@@ -1,5 +1,7 @@
 BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   initialize: function () {
+    this.note = new BetterNote.Models.Note();
+
     this.notebooks = new BetterNote.Collections.Notebooks();
     this.notebooks.fetch();
 
@@ -16,7 +18,8 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     'click a[href]' : 'bindAnchorTag',
     'keyup div.text-editor-page' : 'setSaveInterval',
     'keyup input.note-title' : 'setSaveInterval',
-    'keyup input.notebook-search-field' : 'processKey'
+    'keyup input.notebook-search-field' : 'processKey',
+    'click li.notebook-option' : 'reassignNotebook'
   },
 
   colorArr: [
@@ -51,15 +54,38 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   //manage notebook options
   addView: function (notebook) {
     var notebookView = new BetterNote.Views.NotebookOption({
-      model: notebook
+      model: notebook,
+      parentView: this
     });
     this.addSubview('.notebook-options', notebookView);
   },
 
-
   resetNotebooks: function () {
     this.removeAllViews('.notebook-options');
     this.addAllViews(this.notebooks);
+  },
+
+  assignToNotebook: function (view) {
+    var notebookId = view.notebook.get('id');
+    this.note.save({ user_id: 1,
+                     notebook_id: notebookId });
+  },
+
+  reassignNotebook: function (e) {
+    this.deselectNotebook();
+    this.selectNotebook(e);
+  },
+
+  selectNotebook: function (e) {
+    var currentTarget = $(e.currentTarget);
+    var spanEl = currentTarget.find('span');
+    $('<i class="fa fa-check"></i>').insertAfter(spanEl);
+    spanEl.addClass('selected');
+  },
+
+  deselectNotebook: function () {
+    this.$el.find('span.selected').removeClass('selected');
+    this.$el.find('i.fa-check').remove();
   },
 
   //user types in the search box
@@ -67,8 +93,8 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     if(e.which === 13) {
       var substr = this.$el.find('.notebook-search-field').val();
       this.notebooks.fetch({ data: $.param({ substr: substr }),
-                         reset: true
-                         });
+                             reset: true
+                           });
     }
   },
 
@@ -141,6 +167,10 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
     return null;
   },
+
+  // saveNote: function () {
+  //
+  // },
 
   setSaveInterval: function () {
     this.$el.off('keyup', 'div.text-editor-page');

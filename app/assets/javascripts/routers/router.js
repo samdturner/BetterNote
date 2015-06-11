@@ -4,7 +4,7 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    'notes/new' : 'createNote',
+    '' : 'createNote',
     'notes' : 'notesSort',
     'search' : 'notesSearch',
     'notebooks' : 'notebooks',

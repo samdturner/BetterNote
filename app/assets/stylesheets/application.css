@@ -1117,8 +1117,24 @@ ul.notebook-options > li > span {
   font-size: 14px;
   font-weight: 300;
   padding: 15px 20px 15px 15px;
-  display: block;
+  display: inline-block;
   font-family: helvetica, arial, sans-serif;
+}
+
+ul.notebook-options > li > span.selected {
+  color: #2dbe60;
+}
+
+ul.notebook-options > li > i.fa-check {
+  color: #2dbe60;
+  float: right;
+  display: inline-block;
+  font-size: 16px;
+  padding: 14px;
+}
+
+ul.notebook-options > li:hover > i.fa-check {
+  color: white;
 }
 
 li {
