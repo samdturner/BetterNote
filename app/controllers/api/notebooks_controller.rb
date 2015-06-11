@@ -1,8 +1,10 @@
 class Api::NotebooksController < ApplicationController
+  before_action :require_signed_in!
+
   def index
-    @notebooks = Notebook.all
+    @notebooks = Notebook.where("user_id = ?", current_user.id)
     substr = params[:substr]
-    if (substr && substr != "" )
+    if (substr && substr != "")
       @notebooks = @notebooks.select do |notebook|
         notebook.contains_substr?(substr)
       end
@@ -13,6 +15,7 @@ class Api::NotebooksController < ApplicationController
 
   def create
     @notebook = Notebook.new(notebook_params)
+    @notebook.user_id = current_user.id
     if @notebook.save
       render json: @notebook
     else

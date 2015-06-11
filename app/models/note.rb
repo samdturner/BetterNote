@@ -8,11 +8,12 @@ class Note < ActiveRecord::Base
   belongs_to :user
   belongs_to :notebook
 
-  def self.select_notes(sort_col, asc_desc, start_row)
+  def self.select_notes(user_id, sort_col, asc_desc, start_row)
     sort_col = sort_col || "created_at"
     asc_desc = asc_desc || "DESC"
     start_row = start_row || 0
-    sql = "Select * from Notes Order By #{sort_col} #{asc_desc} "\
+    sql = "Select * From notes Where notes.user_id = #{user_id}" 
+          "Order By #{sort_col} #{asc_desc} "\
           "Limit 10 Offset #{start_row}"
     Note.connection.execute(sql)
   end

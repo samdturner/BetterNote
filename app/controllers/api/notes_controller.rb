@@ -1,8 +1,10 @@
 class Api::NotesController < ApplicationController
+  before_action :require_signed_in!
+
   def create
     @note = Note.new(note_params)
-    @note.user_id = User.first.id
-    debugger
+    @note.user_id = current_user.id
+    @note.content = @note.content || ""
     if @note.save
       render json: @note
     else
@@ -12,6 +14,10 @@ class Api::NotesController < ApplicationController
 
   def update
     @note = Note.find_by(id: params[:id])
+    if @note.user_id != current_user.id
+      render text: "Can only update your own note", status: :forbidden
+    end
+
     if @note.update_attributes(note_params)
       render json: @note
     else
@@ -21,11 +27,11 @@ class Api::NotesController < ApplicationController
 
   def index
     if params[:sort_col]
-      @notes = Note.select_notes(params[:sort_col], params[:asc_desc],
-                                 params[:start_row])
+      @notes = Note.select_notes(current_user.id, params[:sort_col],
+                                  params[:asc_desc], params[:start_row])
       render json: @notes
     elsif params[:substr]
-      @notes = Note.all
+      @notes = Note.where("user_id = ?", current_user.id)
       render json: @notes.select { |note| note.contains_substr?(params[:substr]) }
     end
   end
