@@ -1,34 +1,28 @@
-BetterNote.Views.NoteTags = Backbone.CompositeView.extend({
+BetterNote.Views.Tags = Backbone.CompositeView.extend({
   initialize: function (options) {
-    this.noteTags = new BetterNote.Collections.NoteTags();
-    this.noteTags.fetch();
+    this.tagItems = new BetterNote.Collections.Tags();
+    this.tagItems.fetch();
 
-    this.listenTo(this.noteTags, 'add', this.addNoteTag);
+    this.listenTo(this.tagItems, 'add', this.addTag);
   },
 
-  template: [ JST['items_container'], JST['note_tags/header'] ],
+  template: [ JST['items_container'], JST['tags/header'] ],
 
   //updating the view models on the page
-  addNoteTag: function (noteTag) {
-    var noteTag = new BetterNote.Views.NoteTagPanel({
-      model: noteTag,
+  addTag: function (tag) {
+    var tag = new BetterNote.Views.TagPanel({
+      model: tag,
       parentView: this
     });
-    this.addSubview('.item-panels-container', noteTag);
-  },
-
-  addAllNoteTags: function () {
-    this.noteTags.each( function (noteTag) {
-      this.addNoteTag(noteTag);
-    }.bind(this));
+    this.addSubview('.item-panels-container', tag);
   },
 
   render: function () {
     var itemsContainer = this.template[0]();
     this.$el.html(itemsContainer);
 
-    var noteTagsHeader = this.template[1]();
-    this.$el.find('section.items').prepend(noteTagsHeader);
+    var tagsHeader = this.template[1]();
+    this.$el.find('section.items').prepend(tagsHeader);
 
     return this;
   }

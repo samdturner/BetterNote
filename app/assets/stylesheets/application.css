@@ -14,8 +14,7 @@
  *= require_self
  */
 
- div.main-container {
-
+div.main-container {
    position: absolute;
    left: 0px;
    top: 0px;

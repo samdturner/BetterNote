@@ -26,7 +26,12 @@ class Api::NotesController < ApplicationController
   end
 
   def index
-    if params[:notebook_id]
+    if params[:tag_id]
+      notes = Note.select_by_tag(params[:tag_id], current_user.id,
+                                  params[:sort_col], params[:asc_desc],
+                                  params[:start_row])
+      render json: notes
+    elsif params[:notebook_id]
       @notes = Note.select_by_notebook(current_user.id, params[:sort_col],
                                         params[:asc_desc], params[:start_row],
                                         params[:notebook_id])

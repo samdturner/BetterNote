@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+TagAssignment.delete_all
 Note.delete_all
 Notebook.delete_all
 Tag.delete_all
@@ -25,9 +26,16 @@ notebook_id = Notebook.first.id
 tag1 = Tag.create!(name: "Awesome Tag", user_id: user.id)
 tag2 = Tag.create!(name: "Unawesome Tag", user_id: user.id)
 
+notes = []
 50.times do |n|
   # idx = n % 5
   # notebook_id = notebook_ids[idx]
-  Note.create!(user_id: user.id, title: Faker::Lorem.word,
-               notebook_id: notebook_id, content: Faker::Lorem.paragraph)
+  notes << Note.create!(user_id: user.id, title: Faker::Lorem.word,
+                        notebook_id: notebook_id, content: Faker::Lorem.paragraph)
+end
+
+10.times do |n|
+  TagAssignment.create!(note_id: notes[n].id, tag_id: tag1.id)
+  TagAssignment.create!(note_id: notes[n].id, tag_id: tag2.id)
+  TagAssignment.create!(note_id: notes[n + 10].id, tag_id: tag1.id)
 end

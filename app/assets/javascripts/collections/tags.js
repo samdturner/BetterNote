@@ -1,7 +1,7 @@
-BetterNote.Collections.NoteTags = Backbone.Collection.extend({
+BetterNote.Collections.Tags = Backbone.Collection.extend({
   url: 'api/tags',
 
-  model: BetterNote.Models.NoteTag,
+  model: BetterNote.Models.Tag,
 
   getOrFetch: function (id) {
     var tag = this.get(id);

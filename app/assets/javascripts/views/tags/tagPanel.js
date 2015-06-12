@@ -1,8 +1,8 @@
-BetterNote.Views.NoteTagPanel = Backbone.View.extend({
-  template: JST['note_tags/panel'],
+BetterNote.Views.TagPanel = Backbone.View.extend({
+  template: JST['tags/panel'],
 
   render: function () {
-    var content = this.template({ tag: this.model });
+    var content = this.template({ tagItem: this.model });
     this.$el.html(content);
 
     return this;

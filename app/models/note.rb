@@ -8,23 +8,33 @@ class Note < ActiveRecord::Base
   belongs_to :user
   belongs_to :notebook
 
-  def self.select_notes(user_id, sort_col, asc_desc, start_row)
+  has_many :tag_assignments, dependent: :destroy
+
+  has_many :tags, through: :tag_assignments, source: :tag
+
+  def self.select_all(user_id, sort_col, asc_desc, start_row)
     notes = Note.select_sorted(user_id, sort_col, asc_desc)
     notes.limit(10).offset(start_row)
+  end
+
+  def self.select_by_tag(tag_id, user_id, sort_col, asc_desc, start_row)
+    tag = Tag.find(tag_id)
+    notes = tag.notes.where(user_id: user_id).order("#{sort_col} #{asc_desc}")
+    Note.limit_selection(notes, start_row)
   end
 
   def self.select_by_notebook(user_id, sort_col, asc_desc, start_row, notebook_id)
-    
-    notes = Note.select_sorted(user_id, sort_col, asc_desc)
+    notes = Note.select_sorted(Note.all, user_id, sort_col, asc_desc)
     notes = notes.where(notebook_id: notebook_id)
-    notes.limit(10).offset(start_row)
+    Note.limit_selection(notes, start_row)
   end
 
-  def self.select_sorted(user_id, sort_col, asc_desc)
-    sort_col = sort_col || "created_at"
-    asc_desc = asc_desc || "DESC"
-    start_row = start_row || 0
-    Note.where(user_id: user_id).order("#{sort_col} #{asc_desc}")
+  def self.selected_sorted(notes, user_id, sort_col, asc_desc)
+    notes.where(user_id: user_id).order("#{sort_col} #{asc_desc}")
+  end
+
+  def self.limit_selection(notes, start_row)
+    notes.limit(10).offset(start_row)
   end
 
   def contains_substr?(substr)
