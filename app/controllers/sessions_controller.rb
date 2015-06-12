@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_if_signed_in, only: [:new, :create, :destroy]
+  before_action :redirect_if_signed_in!, only: [:new, :create, :destroy]
 
   def new
   end
@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     )
     if user
       sign_in(user)
-      redirect_to '/#/notes/new'
+      redirect_to ''
     else
       flash.now[:errors] = "Invalid login credentials"
       render :new

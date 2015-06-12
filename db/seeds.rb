@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Note.delete_all
+Notebook.delete_all
 User.delete_all
 
 user = User.create!(email: 'example', password: 'password')
@@ -18,10 +19,11 @@ end
 notebook_ids = []
 
 Notebook.all.each { |notebook| notebook_ids << notebook.id }
+notebook_id = Notebook.first.id
 
 50.times do |n|
-  idx = n % 5
-  notebook_id = notebook_ids[idx]
+  # idx = n % 5
+  # notebook_id = notebook_ids[idx]
   Note.create!(user_id: user.id, title: Faker::Lorem.word,
-               notebook_id: notebook_ids, content: Faker::Lorem.paragraph)
+               notebook_id: notebook_id, content: Faker::Lorem.paragraph)
 end

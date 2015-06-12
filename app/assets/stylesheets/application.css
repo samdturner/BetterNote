@@ -1173,3 +1173,21 @@ ul.notebook-options > li:hover > div.bottom-border {
 ul.notebook-options > li:last-child > div.bottom-border {
   background-color: transparent;
 }
+
+header.item-name {
+  width: 100%;
+  margin: 0;
+  background-color: #393d41;
+}
+
+header.item-name > span {
+  color: white;
+  font-size: 2.2em;
+  font-family: "Roboto", times, serif;
+  font-weight: 100;
+  margin: 0 auto;
+  text-align: center;
+  padding: 24px 20px;
+  width: 604px;
+  display: block;
+}

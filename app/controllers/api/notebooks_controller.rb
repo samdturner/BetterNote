@@ -23,6 +23,15 @@ class Api::NotebooksController < ApplicationController
     end
   end
 
+  def show
+    @notebook = Notebook.find(params[:id])
+    if @notebook && @notebook.user_id == current_user.id
+      render json: @notebook
+    else
+      render text: "You can only view your own notebook", status: :forbidden
+    end
+  end
+
   private
   def notebook_params
     params.require(:notebook).permit(:title)

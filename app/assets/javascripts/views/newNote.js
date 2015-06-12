@@ -68,8 +68,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
   assignToNotebook: function (view) {
     var notebookId = view.notebook.get('id');
-    this.note.save({ user_id: 1,
-                     notebook_id: notebookId });
+    this.note.save({ notebook_id: notebookId });
   },
 
   reassignNotebook: function (e) {
@@ -171,9 +170,10 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
   processNoteUpdate: function () {
     if(this.typeCount === 10) {
+      
       var title = this.$el.find('.note-title').val();
       var content = this.$el.find('div.text-editor-page').html();
-      this.model.save({ title: title,
+      this.note.save({ title: title,
                         content: content });
       this.typeCount = 0;
     } else {

@@ -33,7 +33,7 @@ gem 'backbone-on-rails'
 
 group :development, :test do
   gem 'faker'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Call 'byebug' anywhere in the code to stop execution and get a  console
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

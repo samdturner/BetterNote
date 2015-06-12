@@ -1,24 +1,37 @@
-BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
-  initialize: function (options) {
-    this.notes = new BetterNote.Collections.Notes();
-    this.noteCount = 0;
+Backbone.NotesSortView = function (options) {
+  this.inheritedEvents = [];
 
-    this.sortColIdx = this.readCookie('sortColIdx') || 0;
-    this.fetchNotes(this.sortColIdx, true);
+  Backbone.CompositeView.call(this, options);
 
-    _.bindAll(this, 'detectScroll');
-    $(window).scroll(this.detectScroll);
+  this.notes = new BetterNote.Collections.Notes();
+  this.noteCount = 0;
 
-    this.addAllViews(this.notes);
+  this.sortColIdx = this.readCookie('sortColIdx') || 0;
 
-    this.listenTo(this.notes, 'add', this.addView);
-    this.listenTo(this.notes, 'reset', this.resetNotes);
+  _.bindAll(this, 'detectScroll');
+  $(window).scroll(this.detectScroll);
+
+  this.addAllViews(this.notes);
+
+  this.listenTo(this.notes, 'add', this.addView);
+  this.listenTo(this.notes, 'reset', this.resetNotes);
+};
+
+_.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
+  baseEvents: {'click li[data-id]' : 'updateSortType'},
+
+  events: function() {
+      var e = _.extend({}, this.baseEvents);
+
+      _.each(this.inheritedEvents, function(events) {
+        e = _.extend(e, events);
+      });
+
+      return e;
   },
 
-  template: [JST['items_container'], JST['notes/header']],
-
-  events: {
-    'click li[data-id]' : 'updateSortType'
+  addEvents: function(eventObj) {
+      this.inheritedEvents.push(eventObj);
   },
 
   //updating the view models on the page
@@ -65,20 +78,19 @@ BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
     this.fetchNotes(id, true);
   },
 
-  fetchNotes: function (id, isReset) {
+  ascDesc: function (id) {
+    return id % 2 == 0 ? 'ASC' : 'DESC';
+  },
+
+  sortCol: function (id) {
     var sortCols = ['created_at', 'updated_at', 'title'];
     var idx = Math.floor(id / 2);
-    var sortCol = sortCols[idx];
+    return sortCols[idx];
+  },
 
-    var asc_desc = id % 2 == 0 ? 'ASC' : 'DESC';
-
-    this.notes.fetch({ data: $.param({ asc_desc: asc_desc,
-                                       sort_col: sortCol,
-                                       start_row: this.noteCount }),
-                       reset: isReset,
-                       success: function () {
-                         this.noteCount += 10;
-                       }.bind(this) });
+  checkSortOpt: function () {
+    this.$el.find('[data-id=' + this.sortColIdx + ']').addClass('selected');
+    this.updateSortTitle(this.sortColIdx);
   },
 
   //reading and writing the cookie which stores the sort type
@@ -106,18 +118,5 @@ BetterNote.Views.NotesSort = Backbone.CompositeView.extend({
       }
     }
     return '';
-  },
-
-  render: function () {
-    var itemsContainer = this.template[0]();
-    this.$el.html(itemsContainer);
-
-    var notesHeader = this.template[1]();
-    this.$el.find('section.items').prepend(notesHeader);
-
-    this.$el.find('[data-id=' + this.sortColIdx + ']').addClass('selected');
-    this.updateSortTitle(this.sortColIdx);
-
-    return this;
   }
-})
+});

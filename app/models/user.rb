@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :notes, dependent: :destroy
+  has_many :notebooks, dependent: :destroy
 
   attr_reader :password
 
