@@ -26,7 +26,6 @@ class Api::NotesController < ApplicationController
   end
 
   def index
-    
     if params[:notebook_id]
       @notes = Note.select_by_notebook(current_user.id, params[:sort_col],
                                         params[:asc_desc], params[:start_row],

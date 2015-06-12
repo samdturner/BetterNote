@@ -8,6 +8,7 @@
 
 Note.delete_all
 Notebook.delete_all
+Tag.delete_all
 User.delete_all
 
 user = User.create!(email: 'example', password: 'password')
@@ -20,6 +21,9 @@ notebook_ids = []
 
 Notebook.all.each { |notebook| notebook_ids << notebook.id }
 notebook_id = Notebook.first.id
+
+tag1 = Tag.create!(name: "Awesome Tag", user_id: user.id)
+tag2 = Tag.create!(name: "Unawesome Tag", user_id: user.id)
 
 50.times do |n|
   # idx = n % 5
