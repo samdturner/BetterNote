@@ -46,7 +46,8 @@ div.main-container {
    float: left;
  }
 
- .header-left > li {
+ .header-left > li,
+ .header-left > span {
    font-size: 11px;
    font-weight: 500;
    color: #ababab;
@@ -1189,4 +1190,28 @@ header.item-name > span {
   padding: 24px 20px;
   width: 604px;
   display: block;
+}
+
+ul.header-group > li.tag,
+ul.header-group > li.new-tag {
+  background-color: #f8f8f8;
+  vertical-align: top;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  margin-left: 6px;
+  padding: 3px 5px;
+}
+
+input.new-tag,
+li.tag > span,
+li.new-tag > span {
+  color: #606060;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: helvetica;
+}
+
+ul.header-group > li.new-tag {
+  margin-left: 0px;
 }

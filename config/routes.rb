@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :notes, only: [:create, :show, :update, :index]
     resources :notebooks, only: [:index, :create, :show]
-    resources :tags, only: [:index, :show]
+    resources :tags, only: [:index, :create, :show, :destroy]
+    resources :tag_assignments, only: [:index, :destroy, :create]
   end
 end

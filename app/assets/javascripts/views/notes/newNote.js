@@ -10,7 +10,10 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     this.listenTo(this.notebooks, 'reset', this.resetNotebooks);
   },
 
-  template: [JST['notes/new'], JST['notes/notebook_options_container']],
+  template: [ JST['notes/new'],
+              JST['notes/notebook_options_container'],
+              JST['tags/name'],
+              JST['tags/input_new'] ],
 
   events: {
     'click .font-modifier' : 'fontTool',
@@ -20,7 +23,9 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     'keyup div.text-editor-page' : 'processNoteUpdate',
     'keyup input.note-title' : 'processNoteUpdate',
     'keyup input.notebook-search-field' : 'processKey',
-    'click li.notebook-option' : 'reassignNotebook'
+    'click li.notebook-option' : 'reassignNotebook',
+    'click span.new-tag-char' : 'addTagInput',
+    'keyup input.new-tag' : 'processNewTag'
   },
 
   colorArr: [
@@ -170,7 +175,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
   processNoteUpdate: function () {
     if(this.typeCount === 10) {
-      
+
       var title = this.$el.find('.note-title').val();
       var content = this.$el.find('div.text-editor-page').html();
       this.note.save({ title: title,
@@ -181,6 +186,48 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     }
   },
 
+  //tags
+  addTagInput: function () {
+    this.appendNewTagInput();
+    this.removeNewTagChar();
+  },
+
+  processNewTag: function (e) {
+    if(e.which === 13) {
+      var newTag = new BetterNote.Models.Tag({})
+      this.appendTag();
+      this.removeNewTagInput();
+      this.appendNewTagChar();
+    }
+  },
+
+  appendTag: function () {
+    var tagName = this.$el.find('input.new-tag').val();
+    var tagList = this.$el.find('ul.header-group.header-left');
+    var tagContent = this.template[2]({ name: tagName });
+    tagList.append(tagContent);
+  },
+
+
+  appendNewTagInput: function () {
+    var newTagInput = this.template[3]();
+    this.$el.find('ul.header-group.header-left').append(newTagInput);
+    this.$el.find('input.new-tag').focus();
+  },
+
+  removeNewTagInput: function () {
+    this.$el.find('li.new-tag').remove();
+  },
+
+  appendNewTagChar: function () {
+    this.$el.find('ul.header-left')
+            .append('<span class="new-tag-char">New tag...</span>');
+  },
+
+  removeNewTagChar: function () {
+    this.$el.find('span.new-tag-char').remove();
+  },
+
   render: function () {
     var content = this.template[0]({ fontStyleArr: this.fontStyleArr,
                                   fontSizeArr: this.fontSizeArr,
@@ -189,6 +236,8 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
     var notebookOptions = this.template[1]();
     this.$el.find('li.create-notebook-group').append(notebookOptions);
+
+    this.appendNewTagChar();
 
 
     return this;
