@@ -1,4 +1,4 @@
-class Api::TagsAssignmentsController < ApplicationController
+class Api::TagAssignmentsController < ApplicationController
   before_action :require_signed_in!
   before_action :correct_user, only: [:destroy]
 
@@ -16,7 +16,7 @@ class Api::TagsAssignmentsController < ApplicationController
     if @tag_assignment.save
       render json: @tag_assignment
     else
-      render @tag_assignment.errors.full_messages, status: :unprocessable_entity
+      render json: @tag_assignment.errors.full_messages, status: :unprocessable_entity
     end
   end
 

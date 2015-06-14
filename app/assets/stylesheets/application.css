@@ -30,7 +30,8 @@ div.main-container {
  header.items-header:after,
  div.items-info:after,
  div.date-icon-container:after,
- ul.sort-options-list > li:after {
+ ul.sort-options-list > li:after,
+ div.nav-title:after {
    content: "";
    visibility: hidden;
    display: block;
@@ -59,7 +60,7 @@ div.main-container {
 
 .header-group > li {
   display: inline-block;
-  padding-right: 18px;
+  padding: 0 8px;
   margin-left: 20px;
 }
 
@@ -238,11 +239,15 @@ li > i.fa-tag {
 
 nav.actions-group {
   float: left;
-  padding: 12px 12px 24px 17px;
+  padding: 12px 12px 24px 5px;
   background-color: #f8f8f8;
   height: 100%;
   border-right: 1px solid #ececec;
   position: fixed;
+}
+
+div.nav-title {
+  margin-left: 22px;
 }
 
 ul.action-icons {
@@ -250,7 +255,7 @@ ul.action-icons {
   margin-top: 28px;
 }
 
-div.icon-circle {
+li > div.primary-circle {
   background-color: white;
   border: 1px solid #d1d1d1;
   transition: background-color 0.2s ease;
@@ -259,73 +264,86 @@ div.icon-circle {
   height: 36px;
   margin-top: 12px;
   margin-bottom: 12px;
+  display: inline-block;
 }
 
-div.secondary-circle {
+li > div.secondary-circle {
   border-radius: 18px;
   width: 36px;
   height: 36px;
   margin-top: 13px;
   margin-bottom: 13px;
   transition: background-color 0.2s ease;
+  display: inline-block;
 }
 
-div.secondary-circle:hover {
-  background-color: #2dbe60;
+li.single-action > div > i {
+  color: #2dbe60;
+  font-size: 18px;
+}
+
+li.single-action:hover {
   cursor: pointer;
 }
 
-div.secondary-circle:hover > .action-icon {
-  color: white;
+li.single-action:hover > div.primary-circle {
+  background-color: #2dbe60;
 }
 
-i.action-icon {
-  padding-left: 8px;
-  font-size: 20px;
-  padding-top: 7px;
+li.single-action:hover > span {
   color: #2dbe60;
 }
 
-div.icon-circle > i.fa-plus {
-  padding-left: 10px;
-  padding-top: 8px;
+li.single-action:hover > div > i {
+  color: white
 }
 
-div.icon-circle > i.fa-search {
-  padding-left: 8px;
-  padding-top: 7px;
+li.icon-circle:hover > i.action-icon {
+  color: white;
 }
 
-div.secondary-circle > i.fa-star {
-  padding-left: 9px;
-  padding-top: 8px;
-}
-
-div.secondary-circle > i.fa-file-text {
-  padding-left: 10px;
-  padding-top: 7px;
-}
-
-div.secondary-circle > i.fa-tag {
-  padding-left: 10px;
-  padding-top: 7px;
-}
-
-div.icon-circle:hover {
+li.single-action:hover > div.secondary-circle {
   background-color: #2dbe60;
   border-color: #2dbe60;
   cursor: pointer;
 }
 
-div.icon-circle:hover i.action-icon {
-  color: white;
+li.single-action > div.secondary-circle {
+  font-size: 20px;
+  color: #2dbe60;
 }
 
-ul.action-labels {
-  float: left;
-  color: #807f83;
-  margin-top: 28px;
+div.primary-circle > i.fa-plus {
+  margin-left: 9px;
+  margin-top: 8px;
+  font-size: 22px;
 }
+
+div.primary-circle > i.fa-search {
+  margin-left: 9px;
+  margin-top: 8px;
+}
+
+div.secondary-circle > i.fa-star {
+  margin-left: 9px;
+  margin-top: 8px;
+}
+
+div.secondary-circle > i.fa-book {
+  margin-top: 8px;
+  margin-left: 9px;
+}
+
+div.secondary-circle > i.fa-file-text {
+  margin-left: 11px;
+  margin-top: 9px;
+}
+
+div.secondary-circle > i.fa-tag {
+  margin-left: 10px;
+  margin-top: 9px;
+}
+
 
 div.action-label.top {
   margin-bottom: 2px;
@@ -335,8 +353,8 @@ div.action-label.middle {
   margin-bottom: 1px;
 }
 
-.action-label > span {
-  display: block;
+div.action-icons span {
+  display: inline-block;
   height: 36px;
   line-height: 36px;
   padding: 6px 10px;
@@ -345,18 +363,19 @@ div.action-label.middle {
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
+  color: rgb(128, 127, 131);
 }
 
-.action-label > span:hover {
+.action-icons span:hover {
   color: #2dbe60;
 }
 
-div.action-label-group {
+div.action-icons.top {
   margin-top: 5px;
 }
 
-div.action-icons-group.middle {
-  margin-top: 70px;
+div.action-icons.middle {
+  margin-top: 40px;
 }
 
 div.action-label-group.middle {
@@ -375,51 +394,52 @@ div.nav-title > span {
   float: left;
   font-size: 17px;
   font-weight: 400;
-  margin-left: 5px;
+  margin-left: 10px;
   text-transform: uppercase;
   padding-top: 5px;
   padding-bottom: 8px;
 }
 
-div.log-out-container {
+div.action-icons.bottom {
   position: absolute;
   bottom: 40px;
   left: 0px;
   border-top: 1px solid #ececec;
   width: 183px;
   color: #807f83;
+  float: left;
 }
 
-.log-out-group:after {
+div.action-icons.bottom > li.single-action {
+  padding: 0 22px;
+}
+
+div.action-icons.bottom:after {
   content: "";
   visibility: hidden;
   display: block;
   clear: both;
 }
-
-div.action-label.bottom {
-  float: left;
-}
-
+/*
 .log-out-group > div.secondary-circle {
   float: left;
-}
-
+}*/
+/*
 .log-out-group {
   padding: 2px 20px;
-}
+}*/
 
-div.secondary-circle > i.fa-sign-out {
+div.action-icons i.fa-sign-out {
   padding-top: 9px;
   padding-left: 11px;
   color: #2dbe60;
 }
 
-div.secondary-circle:hover > i.fa-sign-out {
+li.secondary-circle:hover > i.fa-sign-out {
   color: white;
 }
 
-div.action-label.bottom {
+div.action-icons.bottom {
   padding-top: 6px;
 }
 
@@ -1108,7 +1128,6 @@ div.notebook-options-container {
   width: 330px;
   position: absolute;
   z-index: -5;
-  bottom: -308px;
   visibility: hidden;
 }
 
@@ -1193,18 +1212,19 @@ header.item-name > span {
 }
 
 ul.header-group > li.tag,
-ul.header-group > li.new-tag {
+ul.new-tag-group > li.new-tag {
   background-color: #f8f8f8;
   vertical-align: top;
   border: 1px solid #ececec;
   border-radius: 4px;
-  margin-left: 6px;
+  margin-left: 0px;
+  margin-right: 6px;
   padding: 3px 5px;
 }
 
 input.new-tag,
 li.tag > span,
-li.new-tag > span {
+li.new-tag-char > span {
   color: #606060;
   display: inline-block;
   font-size: 11px;
@@ -1212,6 +1232,32 @@ li.new-tag > span {
   font-family: helvetica;
 }
 
-ul.header-group > li.new-tag {
+ul.new-tag-group > li.new-tag,
+ul.new-tag-group > li.new-tag-char {
   margin-left: 0px;
+}
+
+ul.new-tag-group {
+  float: left;
+  display: inline-block;
+}
+
+li.new-tag,
+li.new-tag-char {
+  padding: 0px;
+}
+
+li.new-tag-char > span {
+  font-size: 11px;
+  font-weight: 500;
+  color: #ababab;
+}
+
+li.new-tag {
+  height: 14px;
+}
+
+li.new-tag-char {
+  margin-left: 0px;
+  margin-right: 6px;
 }

@@ -1,17 +1,23 @@
 class Api::TagsController < ApplicationController
   before_action :require_signed_in!
-  before_action :correct_user
+  before_action :correct_user, only: [:destroy, :show]
 
   def index
     render json: current_user.tags
   end
 
   def create
-    @tag = Tag.new(tag_params)
-    if @tag.save
+    @tag = Tag.find_by_name(params[:name])
+    if @tag
       render json: @tag
     else
-      render json: @tag.errors.full_messages, status: :unprocessable_entity
+      @tag = Tag.new(tag_params)
+      @tag.user_id = current_user.id
+      if @tag.save
+        render json: @tag
+      else
+        render json: @tag.errors.full_messages, status: :unprocessable_entity
+      end
     end
   end
 
@@ -30,7 +36,7 @@ class Api::TagsController < ApplicationController
   end
 
   def correct_user
-    @tag = current_user.tag.find(params[:id])
+    @tag = current_user.tags.find(params[:id])
     if @tag.nil?
       render text: "Can only delete your tags", status: 404
     end

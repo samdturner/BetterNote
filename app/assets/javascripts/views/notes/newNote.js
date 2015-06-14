@@ -6,13 +6,18 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     this.notebooks = new BetterNote.Collections.Notebooks();
     this.notebooks.fetch();
 
+    this.tagItems = new BetterNote.Collections.Tags();
+
     this.listenTo(this.notebooks, 'add', this.addView);
     this.listenTo(this.notebooks, 'reset', this.resetNotebooks);
+
+    this.listenTo(this.tagItems, 'add', this.addView);
+    this.listenTo(this.tagItems, 'remove', this.removeView);
   },
 
   template: [ JST['notes/new'],
               JST['notes/notebook_options_container'],
-              JST['tags/name'],
+              JST['tags/char_new'],
               JST['tags/input_new'] ],
 
   events: {
@@ -25,7 +30,8 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     'keyup input.notebook-search-field' : 'processKey',
     'click li.notebook-option' : 'reassignNotebook',
     'click span.new-tag-char' : 'addTagInput',
-    'keyup input.new-tag' : 'processNewTag'
+    'keyup input.new-tag' : 'processNewTag',
+    'click button.done-btn' : 'saveNote'
   },
 
   colorArr: [
@@ -58,12 +64,28 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
 
   //manage notebook options
-  addView: function (notebook) {
+  addView: function (model) {
+    if (model instanceof BetterNote.Models.Notebook) {
+      this.addNotebookView(model);
+    } else if (model instanceof BetterNote.Models.Tag) {
+      this.addTagPinView(model);
+    }
+  },
+
+  addNotebookView: function (notebook) {
     var notebookView = new BetterNote.Views.NotebookOption({
       model: notebook,
       parentView: this
     });
     this.addSubview('.notebook-options', notebookView);
+  },
+
+  addTagPinView: function (tag) {
+    var tagPinView = new BetterNote.Views.TagPin({
+      model: tag,
+      parentView: this
+    });
+    this.addSubview('ul.header-left', tagPinView);
   },
 
   resetNotebooks: function () {
@@ -77,6 +99,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   },
 
   reassignNotebook: function (e) {
+    this.swapNotebookTitleThumb(e);
     this.deselectNotebook();
     this.selectNotebook(e);
   },
@@ -86,6 +109,12 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     var spanEl = currentTarget.find('span');
     $('<i class="fa fa-check"></i>').insertAfter(spanEl);
     spanEl.addClass('selected');
+  },
+
+  swapNotebookTitleThumb: function (e) {
+    var title = $(e.currentTarget).find('span').text();
+    var titleThumb = this.$el.find('span.notebook-title-thumb');
+    titleThumb.text(title);
   },
 
   deselectNotebook: function () {
@@ -173,14 +202,17 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     return null;
   },
 
+  saveNote: function () {
+    var title = this.$el.find('.note-title').val();
+    var content = this.$el.find('div.text-editor-page').html();
+    this.note.save({ title: title,
+                      content: content });
+    this.typeCount = 0;
+  },
+
   processNoteUpdate: function () {
     if(this.typeCount === 10) {
-
-      var title = this.$el.find('.note-title').val();
-      var content = this.$el.find('div.text-editor-page').html();
-      this.note.save({ title: title,
-                        content: content });
-      this.typeCount = 0;
+      this.saveNote();
     } else {
       this.typeCount++;
     }
@@ -194,24 +226,50 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
 
   processNewTag: function (e) {
     if(e.which === 13) {
-      var newTag = new BetterNote.Models.Tag({})
-      this.appendTag();
+      this.createTag();
       this.removeNewTagInput();
       this.appendNewTagChar();
     }
   },
 
-  appendTag: function () {
+  createTag: function () {
     var tagName = this.$el.find('input.new-tag').val();
-    var tagList = this.$el.find('ul.header-group.header-left');
-    var tagContent = this.template[2]({ name: tagName });
-    tagList.append(tagContent);
+    var newTag = new BetterNote.Models.Tag({ name: tagName });
+    newTag.save(null,
+      { success: function (tag) {
+          if ( this.note.get('id') ) {
+            this.createTagAssignment(tag, this.note.get('id'));
+          } else {
+            this.note.save( null,
+              {
+                success: function (note) {
+                  this.createTagAssignment(tag, this.note.get('id'));
+                }.bind(this)
+              }
+            );
+          }
+        }.bind(this)
+      }
+    );
+    // var tagList = this.$el.find('ul.header-group.header-left');
+    // var tagContent = this.template[2]({ name: tagName });
+    // tagList.append(tagContent);
   },
 
+  createTagAssignment: function (tag, noteId) {
+    $.ajax({
+      type: "POST",
+      url: "api/tag_assignments",
+      data: { tag_assignment: { tag_id: tag.get('id'), note_id: noteId } },
+      success: function () {
+        this.tagItems.add(tag);
+      }.bind(this)
+    });
+  },
 
   appendNewTagInput: function () {
     var newTagInput = this.template[3]();
-    this.$el.find('ul.header-group.header-left').append(newTagInput);
+    this.$el.find('ul.new-tag-group').append(newTagInput);
     this.$el.find('input.new-tag').focus();
   },
 
@@ -220,12 +278,12 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
   },
 
   appendNewTagChar: function () {
-    this.$el.find('ul.header-left')
-            .append('<span class="new-tag-char">New tag...</span>');
+    var content = this.template[2]();
+    this.$el.find('ul.new-tag-group').append(content);
   },
 
   removeNewTagChar: function () {
-    this.$el.find('span.new-tag-char').remove();
+    this.$el.find('li.new-tag-char').remove();
   },
 
   render: function () {
@@ -237,7 +295,7 @@ BetterNote.Views.NewNote = Backbone.CompositeView.extend({
     var notebookOptions = this.template[1]();
     this.$el.find('li.create-notebook-group').append(notebookOptions);
 
-    this.appendNewTagChar();
+    // this.appendNewTagChar();
 
 
     return this;

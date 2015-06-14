@@ -48,7 +48,7 @@ class Api::NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:user_id, :notebook_id, :title,
+    params.fetch(:note, {}).permit(:user_id, :notebook_id, :title,
                                  :content, :sort_col, :asec_desc,
                                  :start_row)
   end
