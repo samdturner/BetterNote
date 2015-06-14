@@ -37,7 +37,7 @@ class Api::NotesController < ApplicationController
                                         params[:notebook_id])
       render json: @notes
     elsif params[:sort_col]
-      @notes = Note.select_notes(current_user.id, params[:sort_col],
+      @notes = Note.select_all(current_user.id, params[:sort_col],
                                   params[:asc_desc], params[:start_row])
       render json: @notes
     elsif params[:substr]

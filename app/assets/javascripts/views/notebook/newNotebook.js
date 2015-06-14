@@ -14,6 +14,7 @@ BetterNote.Views.NewNotebook = Backbone.View.extend({
     var newNotebook = new BetterNote.Models.Notebook();
     var title = this.$el.find('input.notebook-name').val();
     newNotebook.save({ title: title });
+    Backbone.history.navigate('notebooks', { trigger: true });
   },
 
   render: function () {

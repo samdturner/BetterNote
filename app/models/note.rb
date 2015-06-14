@@ -13,8 +13,8 @@ class Note < ActiveRecord::Base
   has_many :tags, through: :tag_assignments, source: :tag
 
   def self.select_all(user_id, sort_col, asc_desc, start_row)
-    notes = Note.select_sorted(user_id, sort_col, asc_desc)
-    notes.limit(10).offset(start_row)
+    notes = Note.select_sorted(Note.all, user_id, sort_col, asc_desc)
+    Note.limit_selection(notes, start_row)
   end
 
   def self.select_by_tag(tag_id, user_id, sort_col, asc_desc, start_row)
@@ -29,7 +29,7 @@ class Note < ActiveRecord::Base
     Note.limit_selection(notes, start_row)
   end
 
-  def self.selected_sorted(notes, user_id, sort_col, asc_desc)
+  def self.select_sorted(notes, user_id, sort_col, asc_desc)
     notes.where(user_id: user_id).order("#{sort_col} #{asc_desc}")
   end
 
