@@ -58,3 +58,16 @@
 
   </div>
 </div>
+
+<script type="text/javascript">
+  $('li.single-action').click(function (e) {
+    var links = { 1 : '',
+                  2 : 'search',
+                  3 : 'notes',
+                  4 : 'notebooks',
+                  5 : 'tags' };
+    var dataId = $(e.currentTarget).data('id');
+    var link = links[dataId];
+    Backbone.history.navigate(link, { trigger: true });
+  });
+</script>

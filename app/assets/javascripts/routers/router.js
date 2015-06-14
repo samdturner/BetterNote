@@ -1,18 +1,6 @@
 BetterNote.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = $('#page-content');
-    $('li.single-action').click(this.processLink);
-  },
-
-  processLink: function (e) {
-    var links = { 1 : '',
-                  2 : 'search',
-                  3 : 'notes',
-                  4 : 'notebooks',
-                  5 : 'tags' };
-    var dataId = $(e.currentTarget).data('id');
-    var link = links[dataId];
-    Backbone.history.navigate(link, { trigger: true });
   },
 
   routes: {
