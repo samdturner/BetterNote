@@ -1,12 +1,29 @@
-<h1>Log in!</h1>
-<form action="<%= session_path %>" method="post">
-  <%= auth_token_input %>
+<div class="desktop-mix-image">
+  <header class="login">
+    <div class="seal-logo"></div>
+  </header>
+  <section class="login-container">
+    <span>Better Note</span>
+    <form action="<%= session_path %>" method="post" class="login">
+      <%= auth_token_input %>
 
-  <label for="email">Email</label>
-  <input type="text" id="email" name="user[email]" value="">
+      <label for="email">Email address</label>
+      <input type="text" id="email" name="user[email]" class="email" value="">
 
-  <label for="password">Password</label>
-  <input type="password" id="password" name="user[password]" value="">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="user[password]"
+            class="password" value="">
 
-  <button type="submit">Log in</button>
-</form>
+      <button type="submit" class="guest-login">Guest login</button>
+      <button type="submit" class="login">Sign in</button>
+    </form>
+  </section>
+</div>
+
+<script type="text/javascript">
+  $('button.guest-login').click(function () {
+    $('input.email').val('example');
+    $('input.password').val('password');
+    $( "button.login" ).trigger('click');
+  })
+</script>

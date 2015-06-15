@@ -18,12 +18,14 @@ _.extend(BetterNote.Views.EditNote.prototype, Backbone.NoteTextEditor.prototype,
 
   addNoteTitle: function () {
     var title = this.note.get('title');
-    this.$el.find('input.note-title').val(title);
+    var escapedTitle = encodeURI(title);
+    this.$el.find('input.note-title').val(escapedTitle);
   },
 
   addNoteContent: function () {
     var content = this.note.get('content');
-    this.$el.find('div.text-editor-page').text(content);
+    var escapedContent = encodeURI(content);
+    this.$el.find('div.text-editor-page').text(escapedContent);
   },
 
   fillNote: function () {
