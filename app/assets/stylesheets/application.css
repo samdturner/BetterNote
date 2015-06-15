@@ -1277,7 +1277,7 @@ div.desktop-mix-image {
 
 section.login-container {
   background-color: white;
-  padding: 25px 32px 32px 32px;
+  padding: 22px 32px;
   width: 384px;
   margin: 0 auto;
   border: 1px solid #dedede;
@@ -1286,11 +1286,13 @@ section.login-container {
 }
 
 form.login > label,
-form.login > input {
+form.login > input,
+span.question-text {
   display: block;
 }
 
-form.login > label {
+form.login > label,
+span.question-text {
   font-family: helvetica,arial,sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -1298,6 +1300,9 @@ form.login > label {
   color: #747474;
   display: inline-block;
   margin-bottom: 4px;
+}
+
+form.login > label {
   font-size: 12px;
 }
 
@@ -1323,6 +1328,7 @@ form.login > button {
   font-weight: 200;
   border-radius: 3px;
   text-align: center;
+  margin-bottom: 12px;
 }
 
 button.login {
@@ -1335,7 +1341,6 @@ button.guest-login {
   background-color: #2dbe60;
   color: #fff;
   border-color: #1fae52;
-  margin-bottom: 12px;
 }
 
 button.guest-login:hover {
@@ -1375,4 +1380,41 @@ section.login-container > span {
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
+}
+
+div.sign-in-login {
+  width: 106px;
+  margin: 0 auto;
+}
+
+a.link-text {
+  margin: 0 auto;
+  display: block;
+  transition: all .2s ease;
+  font-family: helvetica,arial,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #2dbe60;
+  text-decoration: none;
+  width: 97px;
+}
+
+a.link-text.sign-in {
+  width: 43px;
+}
+
+span.question-text.have-account {
+  width: 117px;
+}
+
+span.question-text {
+  margin: 0 auto;
+  font-size: 10px;
+}
+
+a.link-text:hover {
+  color: #28a956;
+  cursor: pointer;
 }

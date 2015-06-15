@@ -17,6 +17,11 @@
       <button type="submit" class="guest-login">Guest login</button>
       <button type="submit" class="login">Sign in</button>
     </form>
+
+    <div class="sign-in-login">
+      <span class="question-text">Don't have an account?</span>
+      <%= link_to "Create Account", new_user_path, class: "link-text" %>
+    </div>
   </section>
 </div>
 
