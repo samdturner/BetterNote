@@ -18,7 +18,7 @@ Backbone.NotesSortView = function (options) {
 };
 
 _.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
-  baseEvents: {'click li[data-id]' : 'updateSortType'},
+  baseEvents: { 'click li[data-id]' : 'updateSortType' },
 
   events: function() {
       var e = _.extend({}, this.baseEvents);
