@@ -1,5 +1,6 @@
 class Api::NotesController < ApplicationController
   before_action :require_signed_in!
+  before_action :correct_user
 
   def create
     @note = Note.new(note_params)
@@ -10,6 +11,11 @@ class Api::NotesController < ApplicationController
     else
       render json: @note.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def show
+    debugger
+    render json: @note
   end
 
   def update
@@ -51,5 +57,12 @@ class Api::NotesController < ApplicationController
     params.fetch(:note, {}).permit(:user_id, :notebook_id, :title,
                                  :content, :sort_col, :asec_desc,
                                  :start_row)
+  end
+
+  def correct_user
+    @note = current_user.notes.find(params[:id])
+    if @note.nil?
+      render text: "Can only view your own notes", status: 404
+    end
   end
 end
