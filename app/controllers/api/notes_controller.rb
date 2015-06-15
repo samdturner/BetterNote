@@ -1,6 +1,6 @@
 class Api::NotesController < ApplicationController
   before_action :require_signed_in!
-  before_action :correct_user
+  before_action :correct_user, only: [:show]
 
   def create
     @note = Note.new(note_params)
@@ -14,7 +14,6 @@ class Api::NotesController < ApplicationController
   end
 
   def show
-    debugger
     render json: @note
   end
 

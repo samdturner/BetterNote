@@ -1,5 +1,14 @@
 BetterNote.Views.NotePanel = Backbone.View.extend({
+  events: {
+    'click' : 'redirectToNote'
+  },
+
   template: JST['notes/panel'],
+
+  redirectToNote: function () {
+    var id = this.model.get('id');
+    Backbone.history.navigate('notes/edit/' + id, { trigger: true });
+  },
 
   formattedDate: function () {
     var date = this.model.get('updated_at').slice(0, 10);
