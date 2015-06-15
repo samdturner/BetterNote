@@ -53,6 +53,7 @@
       </div>
     </ul>
   </nav>
+  <a id="logout" rel="nofollow" data-method="delete" href="http://localhost:3000/session"></a>
 
   <div id="page-content">
 
@@ -67,7 +68,11 @@
                   4 : 'notebooks',
                   5 : 'tags' };
     var dataId = $(e.currentTarget).data('id');
-    var link = links[dataId];
-    Backbone.history.navigate(link, { trigger: true });
+    if(dataId < 6) {
+      var link = links[dataId];
+      Backbone.history.navigate(link, { trigger: true });
+    } else {
+      $('#logout').click();
+    }
   });
 </script>
