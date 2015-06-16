@@ -19,6 +19,12 @@ BetterNote.Views.NotebookOption = Backbone.View.extend({
     this.parentView.assignToNotebook({ notebook: this.model });
   },
 
+  checkNotebook: function () {
+    var spanEl = this.$el.find('span');
+    $('<i class="fa fa-check"></i>').insertAfter(spanEl);
+    spanEl.addClass('selected');
+  },
+
   render: function () {
     var content = this.template({ notebook: this.model });
     this.$el.html(content);

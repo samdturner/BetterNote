@@ -6,6 +6,8 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   routes: {
     '' : 'createNote',
     'notes/edit/:id' : 'editNote',
+    'notes/delete/:id' : 'deleteNote',
+    'notes/share/:id' : 'shareNote',
     'notes' : 'notesSort',
     'notes/notebook/:id' : 'notesNotebook',
     'search' : 'notesSearch',
@@ -23,6 +25,16 @@ BetterNote.Routers.Router = Backbone.Router.extend({
   editNote: function (id) {
     var editNoteView = new BetterNote.Views.EditNote({ noteId: id });
     this._swapViews(editNoteView);
+  },
+
+  deleteNote: function (id) {
+    var deleteNoteView = new BetterNote.Views.DeleteNote({ noteId: id });
+    this._swapViews(deleteNoteView);
+  },
+
+  shareNote: function (id) {
+    var shareNoteView = new BetterNote.Views.ShareNote({ noteId: id });
+    this._swapViews(shareNoteView);
   },
 
   notesSort: function () {

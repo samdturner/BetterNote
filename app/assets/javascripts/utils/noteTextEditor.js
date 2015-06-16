@@ -6,7 +6,6 @@ Backbone.NoteTextEditor = function (options) {
   this.typeCount = 10;
 
   this.notebooks = new BetterNote.Collections.Notebooks();
-  this.notebooks.fetch();
 
   this.listenTo(this.notebooks, 'add', this.addView);
   this.listenTo(this.notebooks, 'reset', this.resetNotebooks);
@@ -27,7 +26,8 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     'click li.notebook-option' : 'reassignNotebook',
     'click span.new-tag-char' : 'addTagInput',
     'keyup input.new-tag' : 'processNewTag',
-    'click button.done-btn' : 'saveNote'
+    'click button.done-btn' : 'saveNote',
+    'click .share-btn' : 'redirectToShare'
   },
 
   events: function() {
@@ -123,6 +123,10 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
 
   swapNotebookTitleThumb: function (e) {
     var title = $(e.currentTarget).find('span').text();
+    this.setNotebookTitleThumb(title);
+  },
+
+  setNotebookTitleThumb: function (title) {
     var titleThumb = this.$el.find('span.notebook-title-thumb');
     titleThumb.text(title);
   },
@@ -294,5 +298,10 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
 
   removeNewTagChar: function () {
     this.$el.find('li.new-tag-char').remove();
+  },
+
+  redirectToShare: function () {
+    var url = 'notes/share/' + this.note.get('id');
+    Backbone.history.navigate( url, { trigger: true });
   }
 });

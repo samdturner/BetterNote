@@ -2,7 +2,13 @@ BetterNote.Views.NotebookPanel = Backbone.View.extend({
   template: JST['notebooks/panel'],
 
   events: {
-    'click' : 'redirectToNotes'
+    'click' : 'redirectToNotes',
+    'click i' : 'redirectToDelete'
+  },
+
+  redirectToDelete: function () {
+    var id = this.model.get('id');
+    Backbone.history.navigate('notes/delete/' + id, { trigger: true });
   },
 
   redirectToNotes: function () {

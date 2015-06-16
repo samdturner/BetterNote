@@ -1,6 +1,6 @@
 class Api::NotesController < ApplicationController
   before_action :require_signed_in!
-  before_action :correct_user, only: [:show]
+  before_action :correct_user, only: [:destroy, :show]
 
   def create
     @note = Note.new(note_params)
@@ -18,6 +18,7 @@ class Api::NotesController < ApplicationController
   end
 
   def update
+    debugger
     @note = Note.find_by(id: params[:id])
     if @note.user_id != current_user.id
       render text: "Can only update your own note", status: :forbidden
@@ -51,11 +52,16 @@ class Api::NotesController < ApplicationController
     end
   end
 
+  def destroy
+    @note.delete
+    render json: { "success" => "Note successfully deleted" }, status: 200
+  end
+
   private
   def note_params
     params.fetch(:note, {}).permit(:user_id, :notebook_id, :title,
                                  :content, :sort_col, :asec_desc,
-                                 :start_row)
+                                 :start_row, :shared)
   end
 
   def correct_user

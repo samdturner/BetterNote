@@ -100,6 +100,8 @@ div.main-container {
   cursor: pointer;
   vertical-align: top;
   padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .share-btn > span {
@@ -324,10 +326,10 @@ div.primary-circle > i.fa-search {
   margin-top: 8px;
 }
 
-div.secondary-circle > i.fa-star {
+/*div.secondary-circle > i.fa-star {
   margin-left: 9px;
   margin-top: 8px;
-}
+}*/
 
 div.secondary-circle > i.fa-book {
   margin-top: 8px;
@@ -1417,4 +1419,178 @@ span.question-text {
 a.link-text:hover {
   color: #28a956;
   cursor: pointer;
+}
+
+
+/* Delete notes page */
+
+header.new-notebook > i.fa-trash {
+  color: grey;
+  font-size: 60px;
+  margin-left: 78px;
+}
+
+header.new-notebook.delete {
+  height: auto;
+}
+
+div.new-notebook-title.delete {
+  padding-bottom: 8px;
+}
+
+span.confirmation {
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+/* Shared note page */
+
+header.shared-note {
+  background-color: #606060;
+  padding: 5px 20px;
+}
+
+header.shared-note > a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 200;
+  font-size: 32px;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+}
+
+header.shared-note > a:hover {
+  color: rgb(45, 190, 96);
+}
+
+section.shared-note {
+  margin: 100px;
+}
+
+section.shared-note > h1 {
+  color: #2dbe60;
+  font-family: 'Roboto', helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+article.content {
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 14px;
+  color: #383838;
+
+}
+
+/* Shared note confirmation page */
+
+section.share-container {
+  width: 450px;
+  margin: 0 auto 0 auto;
+}
+
+header.share-notebook {
+  height: auto;
+  margin-top: 60px;
+  margin-left: 90px;
+  margin-right: 90px;
+  border-bottom: solid 1px #ececec;
+}
+
+header.share-notebook > i.fa-share-alt-square {
+  color: grey;
+  font-size: 60px;
+  margin: 0 auto;
+  width: 52px;
+  display: block;
+}
+
+header.share-notebook > div.share-notebook-title {
+  display: block;
+  color: black;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 auto 0 auto;
+  width: 130px;
+  margin-top: 24px;
+  padding-bottom: 8px;
+}
+
+div.confirmation-container {
+  margin-top: 30px;
+}
+
+span.start-share-msg,
+span.stop-share-msg {
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  display: inline-block;
+  /*margin-top: 30px;
+  margin-bottom: 60px;*/
+  font-weight: 200;
+  font-size: 16px;
+  display: block;
+}
+
+span.stop-share-msg {
+  width: 276px;
+  margin: 0 auto;
+}
+
+span.start-share-msg {
+  width: 432px;
+  margin: 5px auto;
+}
+
+div.share-url {
+  padding: 8px;
+  width: 409px;
+  border-radius: 3px;
+  font-weight: 200;
+  border: 1px solid #d9d9d9;
+  font-size: 14px;
+  color: #878787;
+  display: block;
+  margin: 20px auto;
+}
+
+span.stop-sharing-btn {
+  color: #2DBE60;
+  font-size: 16px;
+  margin-top: 30px;
+  display: block;
+  margin: 0 auto;
+  width: 90px;
+  margin-bottom: 55px;
+  cursor: pointer;
+}
+
+span.share-btn {
+  color: white;
+  border: 1px solid #2dbe60;
+  background-color: #2dbe60;
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 8px 70px 24px 70px;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 178px;
+  display: block;
+}
+
+span.share-btn:hover {
+  background-color: #28a955;
+}
+
+span.stop-sharing-btn:hover {
+  color: #28a955;
 }

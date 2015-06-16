@@ -1,0 +1,21 @@
+<div class="items-container">
+  <section class="share-container">
+    <header class="share-notebook">
+      <i class="fa fa-share-alt-square"></i>
+      <div class="share-notebook-title">Public Note Url</div>
+    </header>
+    <div class="confirmation-container">
+      <span class="start-share-msg">
+        Anyone with this URL can read your note once you click <b>Share</b>.
+      </span>
+      <span class="stop-share-msg">
+        To deactive this URL, click <b>Stop sharing</b>.
+      </span>
+    </div>
+    <div class="share-url">
+      http://www.quiqnote.com/shared/<%= this.note.get('shared_url') %>
+    </div>
+    <span class="stop-sharing-btn">Stop sharing</span>
+    <span class="share-btn">Share</span>
+  </section>
+</div>

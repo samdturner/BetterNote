@@ -12,6 +12,8 @@ class Note < ActiveRecord::Base
 
   has_many :tags, through: :tag_assignments, source: :tag
 
+  before_validation :assign_shared_url_hash, unless: :note_exists?
+
   def self.select_all(user_id, sort_col, asc_desc, start_row)
     notes = Note.select_sorted(Note.all, user_id, sort_col, asc_desc)
     Note.limit_selection(notes, start_row)
@@ -39,5 +41,14 @@ class Note < ActiveRecord::Base
 
   def contains_substr?(substr)
     substr_match?(substr, self.title) || substr_match?(substr, self.content)
+  end
+
+  private
+  def assign_shared_url_hash
+    self.shared_url = SecureRandom.urlsafe_base64(16) unless note_exists?
+  end
+
+  def note_exists?
+    !!self.id
   end
 end

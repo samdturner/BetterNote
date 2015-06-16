@@ -1,0 +1,9 @@
+<header class="shared-note">
+  <%= link_to "BetterNote", root_url %>
+</header>
+<section class="shared-note">
+  <h1><%= @note.title %></h1>
+  <article class="content">
+    <%= @note.content.html_safe %>
+  </article>
+</section>

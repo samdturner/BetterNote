@@ -3,6 +3,7 @@ BetterNote.Views.NewNote = function (options) {
     this.tagItems = new BetterNote.Collections.Tags();
 
     Backbone.NoteTextEditor.call(this, options);
+    this.notebooks.fetch();
 };
 
 _.extend(BetterNote.Views.NewNote.prototype, Backbone.NoteTextEditor.prototype, {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613175016) do
+ActiveRecord::Schema.define(version: 20150616030457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,11 @@ ActiveRecord::Schema.define(version: 20150613175016) do
     t.text     "content"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.boolean  "shared",      default: false
+    t.string   "shared_url"
   end
+
+  add_index "notes", ["shared_url"], name: "index_notes_on_shared_url", unique: true, using: :btree
 
   create_table "tag_assignments", force: :cascade do |t|
     t.integer  "tag_id",     null: false

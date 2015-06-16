@@ -1,11 +1,13 @@
 BetterNote.Views.EditNote = function (options) {
     this.noteId = options.noteId;
     this.note = new BetterNote.Models.Note({ id: this.noteId });
-    this.note.fetch();
 
     this.tagItems = new BetterNote.Collections.Tags();
+    this.tagItems.fetch();
 
     Backbone.NoteTextEditor.call(this, options);
+
+    $.when(this.note.fetch(), this.notebooks.fetch()).done(this.checkAssignedNotebook.bind(this));
 
     this.listenTo(this.note, 'change', this.fillNote);
 };
@@ -18,19 +20,33 @@ _.extend(BetterNote.Views.EditNote.prototype, Backbone.NoteTextEditor.prototype,
 
   addNoteTitle: function () {
     var title = this.note.get('title');
-    var escapedTitle = encodeURI(title);
-    this.$el.find('input.note-title').val(escapedTitle);
+    this.$el.find('input.note-title').val(title);
   },
 
   addNoteContent: function () {
     var content = this.note.get('content');
-    var escapedContent = encodeURI(content);
-    this.$el.find('div.text-editor-page').text(escapedContent);
+
+    var div = document.createElement('div');
+    div.innerHTML = content;
+    var elements = div.childNodes;
+
+    this.$el.find('div.text-editor-page').html(elements);
   },
 
   fillNote: function () {
     this.addNoteTitle();
     this.addNoteContent();
+  },
+
+  checkAssignedNotebook: function () {
+    var notebookId = this.note.get('notebook_id');
+    _(this.subviews('.notebook-options')).each(function (notebookOption) {
+      if (notebookId === notebookOption.model.get('id')) {
+        notebookOption.checkNotebook();
+        var title = notebookOption.model.get('title');
+        this.setNotebookTitleThumb(title);
+      }
+    }.bind(this))
   },
 
   render: function () {
