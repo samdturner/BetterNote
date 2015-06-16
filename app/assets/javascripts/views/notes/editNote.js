@@ -3,7 +3,7 @@ BetterNote.Views.EditNote = function (options) {
     this.note = new BetterNote.Models.Note({ id: this.noteId });
 
     this.tagItems = new BetterNote.Collections.Tags();
-    this.tagItems.fetch();
+    this.tagItems.fetch({ data: $.param({ note_id: this.noteId }) });
 
     Backbone.NoteTextEditor.call(this, options);
 

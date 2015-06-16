@@ -3,7 +3,12 @@ class Api::TagsController < ApplicationController
   before_action :correct_user, only: [:destroy, :show]
 
   def index
-    render json: current_user.tags
+    @note = Note.find(params[:note_id])
+    if current_user.id != @note.user_id
+      render text: "Can only view tags for your own notes", status: 404
+    else
+      render json: @note.tags
+    end
   end
 
   def create
