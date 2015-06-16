@@ -18,7 +18,6 @@ class Api::NotesController < ApplicationController
   end
 
   def update
-    debugger
     @note = Note.find_by(id: params[:id])
     if @note.user_id != current_user.id
       render text: "Can only update your own note", status: :forbidden
