@@ -69,7 +69,8 @@ note_info.each do |note_contents|
   note = Note.create!(user_id: User.first.id, title: note_contents[1][0],
                         content: note_contents[0][0], notebook_id: notebook_id)
 
-  note_contents[3].each do |tag_id|
+  note_contents[3].each do |tag_id_offset|
+    tag_id = tag_id_offset + Tag.first.id
     TagAssignment.create!(note_id: note.id, tag_id: tag_id)
   end
 end

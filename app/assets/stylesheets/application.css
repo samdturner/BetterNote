@@ -482,7 +482,6 @@ div.text-editor-page {
   min-height: 400px;
   width: 770px;
   margin: 0 auto 0 auto;
-  border: 1px solid #2dbe60;
 }
 
 @media screen and (max-width: 1083px) {
@@ -625,7 +624,6 @@ div.size-options-wrapper {
 div.paragraph-alignment-wrapper {
   left: 449px;
   top: -100px;
-  z-index: 2;
   height: 136px;
 }
 
@@ -771,6 +769,7 @@ div.hyperlink-wrapper {
   transition: top 0.7s ease;
   overflow: hidden;
   z-index: -1;
+  -webkit-transition: z-index 0 1s;
 }
 
 div.hyperlink-tool:hover > div.hyperlink-wrapper {
