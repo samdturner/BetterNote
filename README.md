@@ -61,7 +61,7 @@ Backbone.NotesSortView = function (options) {
 
 _.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
 
-# used add an event that is specific to an instance of NotesSortView
+# add an event that is specific to an instance of NotesSortView
   addEvents: function(eventObj) {
       this.inheritedEvents.push(eventObj);
   },
@@ -82,3 +82,4 @@ _.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
 
   ```
 
+This approach allows NotesSortView to inherit the methods of CompositeView.  We can use this same approach to extend our classes indefinitely.
