@@ -35,31 +35,40 @@ Designed and built within a 2-week time period.
 - App Academy's CompositeView (modified)
 - Heroku
 
+## Prototypal Inhertiance Across Mutliple Custom Backbone Views
+There are several views in BetterNote that are all versions of a list of notes with the option to sort.  These views share many common methods which need to be inherited from a common ancestor in order to keep the code DRY.  The inheritance chain should look like: ChildView => NotesSortView => CompositeView => View
+
+However, Backbone's extend() method has several limitations which make it deficient for this task:
+
+1) Extend places instance variables of ChildView on the prototype of NotesSortView.  Thus, each new instance of ChildView would override the properties of the previous instance.
+2) The events hash is also a property of the prototype.  Therefore, we would need to declare a new events hash for the ChildView instance leading to code duplication across children.  However, we should be able to share the parent view's events with the ChildView.
+
+This problem was solved using the following approach:
+
 ```
 # app/assets/javascript/utils/notesSort.js
 
+# NotesSortView is instantiated using a function which acts as the constructor.  The instance variables are assigned within the constructor function which makes them unique to each instance.
 Backbone.NotesSortView = function (options) {
   this.inheritedEvents = [];
 
   Backbone.CompositeView.call(this, options);
 
-  this.notes = new BetterNote.Collections.Notes();
-  this.noteCount = 0;
+# some code removed for simplicity
 
-  this.sortColIdx = this.readCookie('sortColIdx') || 1;
-
-  _.bindAll(this, 'detectScroll');
-  $(window).scroll(this.detectScroll);
-
-  this.addAllViews(this.notes);
-
-  this.listenTo(this.notes, 'add', this.addView);
-  this.listenTo(this.notes, 'reset', this.resetNotes);
 };
 
 _.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
+
+# used add an event that is specific to an instance of NotesSortView
+  addEvents: function(eventObj) {
+      this.inheritedEvents.push(eventObj);
+  },
+
+# base events hash allows us to store events that are common across all instances of NotesSortView
   baseEvents: { 'click li[data-id]' : 'updateSortType' },
 
+# events function concatenates inheritedEvents, baseEvents and parent events
   events: function() {
       var e = _.extend({}, this.baseEvents);
 
@@ -70,18 +79,5 @@ _.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
       return e;
   },
 
-  addEvents: function(eventObj) {
-      this.inheritedEvents.push(eventObj);
-  },
-
-  //updating the view models on the page
-  addView: function (note) {
-    var noteView = new BetterNote.Views.NotePanel({
-      model: note,
-      parentView: this
-    });
-    this.addSubview('.item-panels-container', noteView);
-  }
-  
   ```
 
