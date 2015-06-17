@@ -36,7 +36,7 @@ Designed and built within a 2-week time period.
 - Heroku
 
 ## Prototypal Inhertiance Across Mutliple Custom Backbone Views
-Several views are versions of the same view: a notes with with a sort option.  These views share common methods which need to be inherited from a common parent in order to keep the code DRY.  The inheritance chain should look like: ChildView => NotesSortView => CompositeView => View.  Backbone's extend() method allows us to extend method to child class, which would look like:
+Several views are versions of the same view: a notes with with a sort option.  These views share common methods which need to be inherited from a common parent in order to keep the code DRY.  The inheritance chain should look like: ChildView => NotesSortView => CompositeView => View.  Backbone's extend() method allows us to extend methods to child classes:
 
 ```
 Backbone.NotesSortView = Backbone.CompositeView.extend({
