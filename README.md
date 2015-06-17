@@ -20,7 +20,7 @@ Designed and built within a 2-week time period.
 - Notes are automatically saved on every 10 keystrokes for enhanced user experience
 
 ## Technical Highlights
-- Used prototypal inheritance to extend the methods of two backbone view objects across multiple classes to keep code DRY
+- Used prototypal inheritance to extend the methods of two backbone view objects across multiple classes to keep code DRY (details below)
 - Implemented the KPM substring search algorithm to search for notes
 - Customized rails serialize JSON method for particular models to append attributes and reduce number of server requests
 - Implemented a composite key constraint on tag assignments to ensure no two entries have identical user_id and tag_id
