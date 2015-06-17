@@ -250,6 +250,7 @@ nav.actions-group {
 
 div.nav-title {
   margin-left: 22px;
+  cursor: pointer;
 }
 
 ul.action-icons {

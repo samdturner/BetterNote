@@ -6,7 +6,7 @@ Backbone.NotesSortView = function (options) {
   this.notes = new BetterNote.Collections.Notes();
   this.noteCount = 0;
 
-  this.sortColIdx = this.readCookie('sortColIdx') || 0;
+  this.sortColIdx = this.readCookie('sortColIdx') || 1;
 
   _.bindAll(this, 'detectScroll');
   $(window).scroll(this.detectScroll);

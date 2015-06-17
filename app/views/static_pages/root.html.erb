@@ -61,6 +61,9 @@
 </div>
 
 <script type="text/javascript">
+  $('div.nav-title').click(function (e){
+    Backbone.history.navigate('notes', { trigger: true });
+  });
   $('li.single-action').click(function (e) {
     var links = { 1 : '',
                   2 : 'search',
