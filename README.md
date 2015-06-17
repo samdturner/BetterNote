@@ -40,15 +40,16 @@ There are several views in BetterNote that are all versions of a list of notes w
 
 However, Backbone's extend() method has several limitations which make it deficient for this task:
 
-1) Extend places instance variables of ChildView on the prototype of NotesSortView.  Thus, each new instance of ChildView would override the properties of the previous instance.
-2) The events hash is also a property of the prototype.  Therefore, we would need to declare a new events hash for the ChildView instance leading to code duplication across children.  However, we should be able to share the parent view's events with the ChildView.
+1. Extend places instance variables of ChildView on the prototype of NotesSortView.  Thus, each new instance of ChildView would override the properties of the previous instance.
+2. The events hash is also a property of the prototype.  Therefore, we would need to declare a new events hash for the ChildView instance leading to code duplication across children.  However, we should be able to share the parent view's events with the ChildView.
 
 This problem was solved using the following approach:
 
 ```
 # app/assets/javascript/utils/notesSort.js
 
-# NotesSortView is instantiated using a function which acts as the constructor.  The instance variables are assigned within the constructor function which makes them unique to each instance.
+# NotesSortView is instantiated using a function which acts as the constructor.  
+# The instance variables are assigned within the constructor function which makes them unique to each instance.
 Backbone.NotesSortView = function (options) {
   this.inheritedEvents = [];
 
