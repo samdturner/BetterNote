@@ -1,5 +1,3 @@
-== README
-
 # BetterNote
 
 [Website link][weburl]
