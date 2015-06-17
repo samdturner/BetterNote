@@ -35,3 +35,53 @@ Designed and built within a 2-week time period.
 - App Academy's CompositeView (modified)
 - Heroku
 
+```
+# app/assets/javascript/utils/notesSort.js
+
+Backbone.NotesSortView = function (options) {
+  this.inheritedEvents = [];
+
+  Backbone.CompositeView.call(this, options);
+
+  this.notes = new BetterNote.Collections.Notes();
+  this.noteCount = 0;
+
+  this.sortColIdx = this.readCookie('sortColIdx') || 1;
+
+  _.bindAll(this, 'detectScroll');
+  $(window).scroll(this.detectScroll);
+
+  this.addAllViews(this.notes);
+
+  this.listenTo(this.notes, 'add', this.addView);
+  this.listenTo(this.notes, 'reset', this.resetNotes);
+};
+
+_.extend(Backbone.NotesSortView.prototype, Backbone.CompositeView.prototype, {
+  baseEvents: { 'click li[data-id]' : 'updateSortType' },
+
+  events: function() {
+      var e = _.extend({}, this.baseEvents);
+
+      _.each(this.inheritedEvents, function(events) {
+        e = _.extend(e, events);
+      });
+
+      return e;
+  },
+
+  addEvents: function(eventObj) {
+      this.inheritedEvents.push(eventObj);
+  },
+
+  //updating the view models on the page
+  addView: function (note) {
+    var noteView = new BetterNote.Views.NotePanel({
+      model: note,
+      parentView: this
+    });
+    this.addSubview('.item-panels-container', noteView);
+  }
+  
+  ```
+
