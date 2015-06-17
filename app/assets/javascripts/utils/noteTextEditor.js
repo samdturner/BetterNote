@@ -26,7 +26,7 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     'click li.notebook-option' : 'reassignNotebook',
     'click span.new-tag-char' : 'addTagInput',
     'keyup input.new-tag' : 'processNewTag',
-    'click button.done-btn' : 'saveNote',
+    'click button.done-btn' : 'redirectToNotes',
     'click .share-btn' : 'redirectToShare'
   },
 
@@ -216,6 +216,11 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     return null;
   },
 
+  redirectToNotes: function () {
+    this.saveNote();
+    Backbone.history.navigate( "notes", { trigger: true });
+  },
+
   saveNote: function () {
     var title = this.$el.find('.note-title').val();
     var content = this.$el.find('div.text-editor-page').html();
@@ -265,9 +270,6 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
         }.bind(this)
       }
     );
-    // var tagList = this.$el.find('ul.header-group.header-left');
-    // var tagContent = this.template[2]({ name: tagName });
-    // tagList.append(tagContent);
   },
 
   createTagAssignment: function (tag, noteId) {

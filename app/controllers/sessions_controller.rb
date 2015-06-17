@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     )
     if user
       sign_in(user)
-      redirect_to ''
+      redirect_to '#/notes'
     else
       flash.now[:errors] = "Invalid login credentials"
       render :new

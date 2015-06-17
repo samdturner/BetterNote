@@ -23,12 +23,25 @@
       <%= link_to "Sign in", new_session_path, class: "link-text sign-in" %>
     </div>
   </section>
+
+  <form action="<%= session_path %>" method="post" class="login">
+    <%= auth_token_input %>
+
+    <input type="hidden" id="email" name="user[email]"
+           class="login-email" value="guest@better-note.com">
+
+    <input type="hidden" id="password" name="user[password]"
+          class="login-password" value="password">
+
+    <button type="submit" class="login-btn"></button>
+  </form>
 </div>
 
 <script type="text/javascript">
-  $('button.guest-login').click(function () {
-    $('input.email').val('guest@better-note.com');
-    $('input.password').val('password');
-    $( "button.login" ).trigger('click');
+  $('button.guest-login').click(function (event) {
+    event.preventDefault();
+    $('input.login-email').val('guest@better-note.com');
+    $('input.login-password').val('password');
+    $( "button.login-btn" ).trigger('click');
   })
 </script>
