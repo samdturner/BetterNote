@@ -21,7 +21,7 @@ Designed and built within a 2-week time period.
 
 ## Technical Highlights
 - Used prototypal inheritance to extend the methods of two backbone view objects across multiple classes to keep code DRY (details below)
-- Implemented the KMP substring search algorithm to search for notes
+- Implemented the KMP substring search algorithm to increase efficiency of searching for notes
 - Customized rails serialize JSON method for particular models to append attributes and reduce number of server requests
 - Implemented a composite key constraint on tag assignments to ensure no two entries have identical user_id and tag_id
 - Stored a custom cookie which saves the user's sort preference for notes
