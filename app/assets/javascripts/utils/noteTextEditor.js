@@ -228,9 +228,11 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
 
   saveNote: function () {
     var title = this.$el.find('.note-title').val();
-    var content = this.$el.find('div.text-editor-page').html();
+    var content = this.$el.find('div.text-editor-page');
+    // content.remove('.ql-link-tooltip');
+    // content.remove('.ql-paste-manager');
     this.note.save({ title: title,
-                      content: content });
+                      content: content.html() });
     this.typeCount = 0;
   },
 
@@ -310,8 +312,8 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
   initializeToolbar: function () {
     var fullEditor = new Quill('#text-editor-page', {
       modules: {
-        'toolbar': { container: '#full-toolbar' },
-        'link-tooltip': true
+        'toolbar': { container: '#full-toolbar' }
+        // 'link-tooltip': true
       },
       theme: 'snow'
     });
