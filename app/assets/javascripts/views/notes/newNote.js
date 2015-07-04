@@ -21,8 +21,7 @@ _.extend(BetterNote.Views.NewNote.prototype, Backbone.NoteTextEditor.prototype, 
     var notebookOptions = this.template[1]();
     this.$el.find('li.create-notebook-group').append(notebookOptions);
 
-    // this.appendNewTagChar();
-
+    setTimeout(this.initializeToolbar, 0);
 
     return this;
   }

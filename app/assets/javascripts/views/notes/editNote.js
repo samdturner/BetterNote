@@ -30,7 +30,7 @@ _.extend(BetterNote.Views.EditNote.prototype, Backbone.NoteTextEditor.prototype,
     div.innerHTML = content;
     var elements = div.childNodes;
 
-    this.$el.find('div.text-editor-page').html(elements);
+    this.$el.find('div.ql-editor').html(elements);
   },
 
   fillNote: function () {
@@ -57,6 +57,8 @@ _.extend(BetterNote.Views.EditNote.prototype, Backbone.NoteTextEditor.prototype,
 
     var notebookOptions = this.template[1]();
     this.$el.find('li.create-notebook-group').append(notebookOptions);
+
+    setTimeout(this.initializeToolbar, 0);
 
     return this;
   }

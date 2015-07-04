@@ -510,6 +510,16 @@ div[contenteditable=true]:empty:before {
   }
 }
 
+div.full-toolbar {
+  margin-left: calc(100% - 800px - (100% - 800px) * 0.5);
+}
+
+@media screen and (max-width: 1083px) {
+  div.full-toolbar {
+    margin-left: 50px !important;
+  }
+}
+
 div.text-editor-page {
   padding: 15px;
   font-family: gotham, helvetica, arial, sans-serif;

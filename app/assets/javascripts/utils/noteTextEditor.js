@@ -302,6 +302,16 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     this.$el.find('li.new-tag-char').remove();
   },
 
+  initializeToolbar: function () {
+    var fullEditor = new Quill('#text-editor-page', {
+      modules: {
+        'toolbar': { container: '#full-toolbar' },
+        'link-tooltip': true
+      },
+      theme: 'snow'
+    });
+  },
+
   redirectToShare: function () {
     var url = 'notes/share/' + this.note.get('id');
     Backbone.history.navigate( url, { trigger: true });
