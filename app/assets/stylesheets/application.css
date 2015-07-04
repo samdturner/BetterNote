@@ -485,12 +485,12 @@ div.text-editor-page {
   margin: 0 auto 0 auto;
 }
 
-div[contenteditable=true]:empty:before {
+div.ql-editor[contenteditable=true]:empty:before {
   content: "Create your note...";
   color: rgba(128, 127, 131, 0.6);
   font-family: helvetica, arial, sans-serif;
   font-size: 14px;
-  display: block; /* For Firefox */
+  display: block;
 }
 
 @media screen and (max-width: 1083px) {

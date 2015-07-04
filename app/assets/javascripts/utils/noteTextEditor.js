@@ -27,7 +27,8 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     'click span.new-tag-char' : 'addTagInput',
     'keyup input.new-tag' : 'processNewTag',
     'click button.done-btn' : 'redirectToNotes',
-    'click .share-btn' : 'redirectToShare'
+    'click .share-btn' : 'redirectToShare',
+    'click #text-editor-page' : 'focusEditor'
   },
 
   events: function() {
@@ -66,6 +67,10 @@ _.extend(Backbone.NoteTextEditor.prototype, Backbone.CompositeView.prototype, {
     'rgb(153, 204, 255)', 'rgb(204, 153, 255)',
     'rgb(255, 255, 255)', 'rgb(0, 80, 255)'
   ],
+
+  focusEditor: function () {
+    $('.ql-editor').focus();
+  },
 
   fontStyleArr: ["Gotham", "Georgia", "Helvetica", "Courier New",
                 "Times New Roman", "Trebuchet", "Verdana"],

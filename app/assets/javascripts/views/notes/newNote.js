@@ -12,6 +12,10 @@ _.extend(BetterNote.Views.NewNote.prototype, Backbone.NoteTextEditor.prototype, 
               JST['tags/char_new'],
               JST['tags/input_new'] ],
 
+  emptyEditor: function () {
+    $('.ql-editor').empty();
+  },
+
   render: function () {
     var content = this.template[0]({ fontStyleArr: this.fontStyleArr,
                                   fontSizeArr: this.fontSizeArr,
@@ -22,6 +26,7 @@ _.extend(BetterNote.Views.NewNote.prototype, Backbone.NoteTextEditor.prototype, 
     this.$el.find('li.create-notebook-group').append(notebookOptions);
 
     setTimeout(this.initializeToolbar, 0);
+    setTimeout(this.emptyEditor, 0);
 
     return this;
   }
