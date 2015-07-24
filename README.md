@@ -7,7 +7,7 @@
 ## Concept
 BetterNote is a clone of Evernote that uses a javascript library (quill.js) to allow users to create notes which are saved in the cloud.  These notes can be organized into notebooks and tagged based on subject matter.  This project was built in a two week time period.
 
-Credit: The design of the share url page and the decision to use quill.js was based on QuiqNote: https://github.com/th11/QuiqNote.  Also note that the seed data prior to July 23rd was taken form QuiqNote.  The data has since been updated.
+Credit: The design of the share url page and the decision to use quill.js was based on QuiqNote: https://github.com/th11/QuiqNote.  Also note that the seed data prior to July 23rd was taken from QuiqNote.  The data has since been updated.
 
 ## Key Features
 - Notes are automatically saved on every 10 keystrokes for enhanced user experience
