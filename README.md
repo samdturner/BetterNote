@@ -5,19 +5,18 @@
 [weburl]: https://www.better-note.com/
 
 ## Concept
+BetterNote is a clone of Evernote that uses a javascript library (quill.js) to allow users to create notes which are saved in the cloud.  These notes can be organized into notebooks and tagged based on subject matter.  This project was built in a two week time period.
 
-BetterNote is a note-taking app (inspired by Evernote's web app) that allows users to create rich content (notes), organize those notes, and easily find notes via search, tags,  and notebooks.  Users can share notes via a unique URL. The overall design is minimalistic with rich user feedback when navigating the site. Optimized for Chrome web browser.
-
-Designed and built within a 2-week time period.
+Credit: The design of the share url page and the decision to use quill.js was based on QuiqNote: https://github.com/th11/QuiqNote
 
 ## Key Features
-- Create notes and Notebooks
-- Assign one or many tags to notes
-- Search for notes
-- Share notes via a unique URL
-- Sortable notes
-- Infinite scrolling for long lists
 - Notes are automatically saved on every 10 keystrokes for enhanced user experience
+- Create notes and notebooks
+- Assign one or many tags to notes
+- Search for notes based on any string in the title or content
+- Share notes via public URL
+- Sortable notes (date or title)
+- Infinite scrolling for long lists
 
 ## Technical Highlights
 - Used prototypal inheritance to extend the methods of two backbone view objects across multiple classes to keep code DRY (details below)
@@ -27,12 +26,12 @@ Designed and built within a 2-week time period.
 - Stored a custom cookie which saves the user's sort preference for notes
 - Addressed a potential concurrency issue as a function needed to be called only after both the note model and notebooks collection were guaranteed to have been fetched
 
-## Technologies
+## Technologies Used
 - Backbone js
 - Rails
 - Custom CSS
 - Font Awesome (icons)
-- App Academy's CompositeView (modified)
+- App Academy's compositeView (modified)
 - Heroku
 
 ## Prototypal Inhertiance Across Mutliple Custom Backbone Views
